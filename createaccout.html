@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>PriceBloomBuddy - Sign In or Create Account</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "surface-variant": "#d3e4fe",
+            "on-surface-variant": "#3d4a3d",
+            "surface-bright": "#f8f9ff",
+            "secondary-fixed-dim": "#bcc7de",
+            "on-secondary": "#ffffff",
+            "on-tertiary-container": "#2623b8",
+            "on-tertiary-fixed-variant": "#2f2ebe",
+            "inverse-surface": "#213145",
+            "on-primary-container": "#004b1e",
+            "primary-fixed-dim": "#4ae176",
+            "surface-container": "#e5eeff",
+            "tertiary-fixed-dim": "#c0c1ff",
+            "surface-container-lowest": "#ffffff",
+            "secondary": "#545f73",
+            "on-background": "#0b1c30",
+            "on-primary-fixed-variant": "#005321",
+            "on-primary-fixed": "#002109",
+            "on-error": "#ffffff",
+            "on-error-container": "#93000a",
+            "surface-container-high": "#dce9ff",
+            "outline": "#6d7b6c",
+            "on-tertiary-fixed": "#07006c",
+            "error": "#ba1a1a",
+            "on-primary": "#ffffff",
+            "surface-container-highest": "#d3e4fe",
+            "primary": "#006e2f",
+            "primary-fixed": "#6bff8f",
+            "on-secondary-container": "#586377",
+            "tertiary-container": "#a1a3ff",
+            "error-container": "#ffdad6",
+            "secondary-container": "#d5e0f8",
+            "surface-tint": "#006e2f",
+            "tertiary-fixed": "#e1e0ff",
+            "inverse-primary": "#4ae176",
+            "primary-container": "#22c55e",
+            "on-surface": "#0b1c30",
+            "surface-container-low": "#eff4ff",
+            "tertiary": "#494bd6",
+            "surface": "#f8f9ff",
+            "on-tertiary": "#ffffff",
+            "secondary-fixed": "#d8e3fb",
+            "background": "#f8f9ff",
+            "outline-variant": "#bccbb9",
+            "surface-dim": "#cbdbf5",
+            "inverse-on-surface": "#eaf1ff",
+            "on-secondary-fixed": "#111c2d",
+            "on-secondary-fixed-variant": "#3c475a"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "stack-lg": "24px",
+            "unit": "8px",
+            "container-max": "1280px",
+            "margin-desktop": "32px",
+            "stack-xs": "4px",
+            "stack-sm": "8px",
+            "margin-mobile": "16px",
+            "stack-xl": "48px",
+            "gutter": "24px",
+            "stack-md": "16px"
+          },
+          "fontFamily": {
+            "h2": ["Inter"],
+            "body-md": ["Inter"],
+            "h3": ["Inter"],
+            "body-lg": ["Inter"],
+            "h1": ["Inter"],
+            "label-sm": ["Inter"],
+            "body-sm": ["Inter"],
+            "label-md": ["Inter"]
+          },
+          "fontSize": {
+            "h2": ["32px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+            "body-md": ["16px", {"lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400"}],
+            "h3": ["24px", {"lineHeight": "1.4", "letterSpacing": "0", "fontWeight": "600"}],
+            "body-lg": ["18px", {"lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400"}],
+            "h1": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+            "label-sm": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}],
+            "body-sm": ["14px", {"lineHeight": "1.5", "letterSpacing": "0", "fontWeight": "400"}],
+            "label-md": ["14px", {"lineHeight": "1", "letterSpacing": "0.02em", "fontWeight": "600"}]
+          }
+        }
+      }
+    }
+  </script>
+  <script src="config.js"></script>
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    .toast-notification {
+      animation: slideInRight 0.3s ease-out forwards;
+    }
+    @keyframes slideInRight {
+      from { opacity: 0; transform: translateX(30px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    .toast-notification.hide {
+      animation: fadeOut 0.3s ease-out forwards;
+    }
+    @keyframes fadeOut {
+      to { opacity: 0; transform: translateX(30px); visibility: hidden; }
+    }
+    input:focus {
+      outline: none;
+    }
+  </style>
+</head>
+<body class="bg-background text-on-background min-h-screen">
+
+<!-- Toast Container -->
+<div id="toast-container" class="fixed top-20 right-4 z-[100] flex flex-col gap-2 max-w-sm w-full"></div>
+
+<div class="flex min-h-screen overflow-hidden">
+  <!-- Visual Sidebar (Aesthetic Branding) -->
+  <aside class="hidden lg:flex w-1/3 bg-primary relative flex-col justify-between p-stack-xl">
+    <div class="relative z-10">
+      <div class="font-h2 text-h2 font-bold text-primary-fixed tracking-tight">PriceBloomBuddy</div>
+      <h1 class="font-h1 text-h1 text-white mt-stack-xl max-w-xs">Start your journey to financial bloom.</h1>
+      <p class="font-body-lg text-body-lg text-primary-fixed mt-stack-md">Intelligent price tracking for the savvy consumer.</p>
+    </div>
+    <div class="absolute inset-0 opacity-20 pointer-events-none overflow-hidden">
+      <img alt="Financial Abstract" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_S9rpRj1QIjgODTr7B8eGFa7iU0DlWS6YmE4jGQluLul8szf3Z_zHKeloWpCXfhi1qiVffgYe2vtljGEh3hDm_vInVzbh-0AGJIGMOHqKV9PJa3ZLSYZdFP5-qA4tDxeMskE10YVwSMcN0LB8s9RZQaz_hjo-Pm3IinGIbS5SNp-d-qWAwy66jFoUhiMSlHFrrDH7luRFiX1_7AEnu7uoHDqKJ9tge5Hv-zBdJGQ5tpUtyUH7cC38POpZIuEJ_NdynAY9yBBrN3A"/>
+    </div>
+    <div class="relative z-10">
+      <div class="flex gap-stack-sm items-center">
+        <div class="flex -space-x-3">
+          <img alt="User" class="w-10 h-10 rounded-full border-2 border-primary" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFHeTWQq2ghigyNsbf7A2DrnjHxA_hDyLWe_T1w_8AG1c1R-SBg_DRE6XaR8Za6qpUUzq_BkBs6fxwe1_eAQDzJUIKVJObXX4kZVD8CsR3kRm_J1esWMhukAK39txz7e9gDsD2t5trO9Slbx8zC_NQP3SMCyIT4FgXviznyOgosKKLFhK9He6GUgHWmCdnCAf-7_wXDG3ddVgzbpVYZrhChT8CIAh4EAm70Hq3O0zKFRPQBCiuoUmtick7l58LJIeHCBQ4mEfF_Kc"/>
+          <img alt="User" class="w-10 h-10 rounded-full border-2 border-primary" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDD2wq8Pf5XbDheePfay_Urm_lmMRYG6Hl8i48Od8F50w4a-c0B7ezTiEQ7f8o0ZdTrCQOo5BT1YnPSGaRlsLQS8vnMuwYH-YT8ibYMJ5pL2aTSN-FxeQ1nC9Q1V3AdPhJ0903n67mM2mPzdrlahwTNYi9GUd12eyXwXFxutohU79HHlf2FMkRYmQX7U-d6L102viqHkAwv1wTnxzIed6WhIfyPXZxP16_SKVvgAvMZATUAqIWDf9p57gyU1CTghwKl2lLUhtqebMQ"/>
+        </div>
+        <span class="font-label-md text-label-md text-white">Joined by 12,000+ shoppers</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Content Canvas - Authentication Section -->
+  <main class="flex-1 flex flex-col items-center justify-center p-margin-mobile md:p-margin-desktop bg-surface-bright relative">
+    <!-- Branding for Mobile -->
+    <div class="lg:hidden absolute top-stack-xl left-margin-mobile">
+      <div class="font-h3 text-h3 font-bold text-primary tracking-tight">PriceBloomBuddy</div>
+    </div>
+
+    <!-- Dynamic Content: Login OR Signup OR Home Dashboard -->
+    <div id="auth-container" class="w-full max-w-md">
+      <!-- Login Form (Default View) -->
+      <div id="login-view" class="bg-white rounded-xl shadow-md border border-outline-variant/30 p-stack-xl relative overflow-hidden">
+        <div class="mb-stack-lg">
+          <h2 class="font-h3 text-h3 text-on-surface">Welcome back</h2>
+          <p class="font-body-sm text-body-sm text-secondary mt-stack-xs">Sign in to track your savings</p>
+        </div>
+        <form id="login-form" class="space-y-stack-md">
+          <div>
+            <label class="block font-label-md text-label-md text-on-surface mb-stack-xs">Email Address</label>
+            <div class="relative group">
+              <input id="login-email" class="w-full px-stack-md py-3 rounded-lg border border-outline-variant/50 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all font-body-md text-body-md outline-none" placeholder="alex@example.com" type="email"/>
+              <span class="material-symbols-outlined absolute right-3 top-3 text-outline/50">mail</span>
+            </div>
+          </div>
+          <div>
+            <label class="block font-label-md text-label-md text-on-surface mb-stack-xs">Password</label>
+            <div class="relative group">
+              <input id="login-password" class="w-full px-stack-md py-3 rounded-lg border border-outline-variant/50 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all font-body-md text-body-md outline-none" placeholder="••••••••" type="password"/>
+              <span class="material-symbols-outlined absolute right-3 top-3 text-outline/50 cursor-pointer toggle-password">visibility</span>
+            </div>
+          </div>
+          <div class="text-right">
+            <button id="forgot-password-btn" class="text-primary font-bold hover:underline cursor-pointer">Forgot Password?</button>
+          </div>
+          <button type="submit" class="w-full bg-primary hover:bg-primary/90 text-white font-label-md py-4 rounded-lg shadow-sm hover:shadow-md active:scale-[0.98] transition-all flex justify-center items-center gap-stack-sm">
+            <span>Sign In</span>
+            <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+          </button>
+        </form>
+        <div class="mt-stack-lg text-center">
+          <p class="font-body-sm text-body-sm text-secondary">
+            Don't have an account? <button id="switch-to-signup-btn" class="text-primary font-bold hover:underline cursor-pointer">Create account</button>
+          </p>
+        </div>
+      </div>
+
+      <!-- Signup Form (Hidden Initially) -->
+      <div id="signup-view" class="hidden bg-white rounded-xl shadow-md border border-outline-variant/30 p-stack-xl relative overflow-hidden">
+        <div class="mb-stack-lg">
+          <h2 class="font-h3 text-h3 text-on-surface">Create your account</h2>
+          <p class="font-body-sm text-body-sm text-secondary mt-stack-xs">Enter your details to begin tracking savings</p>
+        </div>
+        <form id="signup-form" class="space-y-stack-md">
+          <div>
+            <label class="block font-label-md text-label-md text-on-surface mb-stack-xs">Full Name</label>
+            <div class="relative group">
+              <input id="signup-name" class="w-full px-stack-md py-3 rounded-lg border border-outline-variant/50 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all font-body-md text-body-md outline-none" placeholder="Alex Walker" type="text"/>
+              <span class="material-symbols-outlined absolute right-3 top-3 text-outline/50">person</span>
+            </div>
+          </div>
+          <div>
+            <label class="block font-label-md text-label-md text-on-surface mb-stack-xs">Email Address</label>
+            <div class="relative group">
+              <input id="signup-email" class="w-full px-stack-md py-3 rounded-lg border border-outline-variant/50 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all font-body-md text-body-md outline-none" placeholder="alex@example.com" type="email"/>
+              <span class="material-symbols-outlined absolute right-3 top-3 text-outline/50">mail</span>
+            </div>
+          </div>
+          <div>
+            <label class="block font-label-md text-label-md text-on-surface mb-stack-xs">Mobile Number</label>
+            <div class="relative group">
+              <input id="signup-mobile" class="w-full px-stack-md py-3 rounded-lg border border-outline-variant/50 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all font-body-md text-body-md outline-none" placeholder="1234567890" type="tel"/>
+              <span class="material-symbols-outlined absolute right-3 top-3 text-outline/50">phone</span>
+            </div>
+          </div>
+          <div>
+            <label class="block font-label-md text-label-md text-on-surface mb-stack-xs">Password</label>
+            <div class="relative group">
+              <input id="signup-password" class="w-full px-stack-md py-3 rounded-lg border border-outline-variant/50 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all font-body-md text-body-md outline-none" placeholder="•••••••• (min 3 chars)" type="password"/>
+              <span class="material-symbols-outlined absolute right-3 top-3 text-outline/50 cursor-pointer toggle-password">visibility</span>
+            </div>
+          </div>
+          <div class="pt-stack-sm">
+            <label class="flex items-start gap-stack-sm cursor-pointer">
+              <input id="signup-terms" class="mt-1 w-4 h-4 text-primary border-outline-variant/50 rounded focus:ring-primary" type="checkbox"/>
+              <span class="font-body-sm text-body-sm text-secondary">I agree to the <a class="text-primary font-semibold hover:underline" href="#">Terms of Service</a> and <a class="text-primary font-semibold hover:underline" href="#">Privacy Policy</a>.</span>
+            </label>
+          </div>
+          <button type="submit" class="w-full bg-primary hover:bg-primary/90 text-white font-label-md py-4 rounded-lg shadow-sm hover:shadow-md active:scale-[0.98] transition-all flex justify-center items-center gap-stack-sm">
+            <span>Create Account</span>
+            <span class="material-symbols-outlined text-[20px]">person_add</span>
+          </button>
+        </form>
+        <div class="mt-stack-lg text-center">
+          <p class="font-body-sm text-body-sm text-secondary">
+            Already have an account? <button id="switch-to-login-btn" class="text-primary font-bold hover:underline cursor-pointer">Sign in</button>
+          </p>
+        </div>
+      </div>
+    </div>
+      <!-- OTP Verify View (Hidden Initially) -->
+      <div id="otp-verify-view" class="hidden bg-white rounded-xl shadow-md border border-outline-variant/30 p-stack-xl relative overflow-hidden">
+        <div class="mb-stack-lg">
+          <h2 class="font-h3 text-h3 text-on-surface">Verify Your Email</h2>
+          <p class="font-body-sm text-body-sm text-secondary mt-stack-xs" id="otp-instruction">Enter the OTP sent to your email to complete verification.</p>
+        </div>
+        <form id="otp-verify-form" class="space-y-stack-md">
+          <div>
+            <label class="block font-label-md text-label-md text-on-surface mb-stack-xs">OTP Code</label>
+            <div class="relative group">
+              <input id="otp-code" class="w-full px-stack-md py-3 rounded-lg border border-outline-variant/50 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all font-body-md text-body-md outline-none" placeholder="123456" type="text"/>
+              <span class="material-symbols-outlined absolute right-3 top-3 text-outline/50">vpn_key</span>
+            </div>
+          </div>
+          <button type="submit" class="w-full bg-primary hover:bg-primary/90 text-white font-label-md py-4 rounded-lg shadow-sm hover:shadow-md active:scale-[0.98] transition-all flex justify-center items-center gap-stack-sm">
+            <span>Verify OTP</span>
+            <span class="material-symbols-outlined text-[20px]">check_circle</span>
+          </button>
+        </form>
+        <div class="mt-stack-lg text-center">
+          <p class="font-body-sm text-body-sm text-secondary">
+            Didn't receive OTP? <button id="resend-otp-btn" class="text-primary font-bold hover:underline cursor-pointer">Resend</button>
+          </p>
+        </div>
+      </div>
+
+      <!-- New Password View (Hidden Initially) -->
+      <div id="new-password-view" class="hidden bg-white rounded-xl shadow-md border border-outline-variant/30 p-stack-xl relative overflow-hidden">
+        <div class="mb-stack-lg">
+          <h2 class="font-h3 text-h3 text-on-surface">Password Reset Successful</h2>
+          <p class="font-body-sm text-body-sm text-secondary mt-stack-xs">Your email has been verified. You can now log in.</p>
+        </div>
+        <button id="go-to-login-btn" class="w-full bg-primary hover:bg-primary/90 text-white font-label-md py-4 rounded-lg shadow-sm hover:shadow-md active:scale-[0.98] transition-all flex justify-center items-center gap-stack-sm">
+          <span>Go to Login</span>
+          <span class="material-symbols-outlined text-[20px]">login</span>
+        </button>
+      </div>
+    <!-- Home Dashboard View (Visible ONLY when logged in) -->
+    <div id="dashboard-view" class="hidden w-full max-w-4xl">
+      <div class="bg-white rounded-xl shadow-md border border-outline-variant/30 p-stack-xl">
+        <div class="flex justify-between items-center mb-stack-lg">
+          <div>
+            <h2 class="font-h2 text-h2 text-on-background">Welcome back, <span id="dashboard-user-name">User</span>!</h2>
+            <p class="font-body-md text-body-md text-secondary mt-stack-xs">Your price tracking dashboard is ready.</p>
+          </div>
+          <button id="logout-from-dashboard" class="px-4 py-2 bg-error/10 text-error rounded-lg hover:bg-error/20 transition-all flex items-center gap-2">
+            <span class="material-symbols-outlined">logout</span>
+            <span>Sign Out</span>
+          </button>
+        </div>
+        
+        <!-- Dashboard Stats -->
+        <div class="grid md:grid-cols-3 gap-stack-md mb-stack-xl">
+          <div class="bg-primary-container/10 rounded-xl p-stack-md border border-primary/20">
+            <div class="flex items-center gap-3">
+              <span class="material-symbols-outlined text-primary">shopping_cart</span>
+              <div>
+                <p class="text-2xl font-bold text-on-background">3</p>
+                <p class="text-sm text-secondary">Active Trackers</p>
+              </div>
+            </div>
+          </div>
+          <div class="bg-primary-container/10 rounded-xl p-stack-md border border-primary/20">
+            <div class="flex items-center gap-3">
+              <span class="material-symbols-outlined text-primary">savings</span>
+              <div>
+                <p class="text-2xl font-bold text-on-background">₹12,450</p>
+                <p class="text-sm text-secondary">Total Savings</p>
+              </div>
+            </div>
+          </div>
+          <div class="bg-primary-container/10 rounded-xl p-stack-md border border-primary/20">
+            <div class="flex items-center gap-3">
+              <span class="material-symbols-outlined text-primary">notifications_active</span>
+              <div>
+                <p class="text-2xl font-bold text-on-background">2</p>
+                <p class="text-sm text-secondary">Pending Alerts</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recent Trackers -->
+        <div class="border-t border-outline-variant/30 pt-stack-lg">
+          <h3 class="font-h3 text-h3 mb-stack-md">Your Tracked Products</h3>
+          <div class="space-y-stack-sm">
+            <div class="flex justify-between items-center p-stack-md bg-surface-container-low rounded-lg">
+              <div class="flex items-center gap-3">
+                <span class="material-symbols-outlined text-primary">headphones</span>
+                <div>
+                  <p class="font-medium">Sony WH-1000XM5</p>
+                  <p class="text-sm text-secondary">Target: ₹24,999 | Current: ₹22,490</p>
+                </div>
+              </div>
+              <span class="text-success font-semibold text-sm">-10%</span>
+            </div>
+            <div class="flex justify-between items-center p-stack-md bg-surface-container-low rounded-lg">
+              <div class="flex items-center gap-3">
+                <span class="material-symbols-outlined text-primary">watch</span>
+                <div>
+                  <p class="font-medium">Apple Watch Series 9</p>
+                  <p class="text-sm text-secondary">Target: ₹35,999 | Current: ₹36,990</p>
+                </div>
+              </div>
+              <span class="text-warning font-semibold text-sm">-3%</span>
+            </div>
+          </div>
+          <button id="add-tracker-from-dash" class="mt-stack-md w-full py-3 border-2 border-dashed border-outline-variant rounded-lg text-primary hover:bg-primary/5 transition-all flex items-center justify-center gap-2">
+            <span class="material-symbols-outlined">add</span> Add New Tracker
+          </button>
+        </div>
+
+        <div class="mt-stack-xl text-center text-sm text-secondary">
+          <p>✨ You're all set! We'll notify you when prices drop.</p>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- Support Footer (visible only on auth views, hidden in dashboard) -->
+<footer id="auth-footer" class="fixed bottom-0 left-0 right-0 bg-transparent pointer-events-none pb-stack-md">
+  <div class="flex justify-center lg:justify-end gap-stack-lg px-margin-desktop pointer-events-auto max-w-container-max mx-auto">
+    <a class="font-label-sm text-label-sm text-secondary hover:text-primary transition-colors" href="#">Help Center</a>
+    <a class="font-label-sm text-label-sm text-secondary hover:text-primary transition-colors" href="#">Security Details</a>
+  </div>
+</footer>
+
+<script>
+  // ---------- Toast Notifications ----------
+  function showToast(message, type = 'info') {
+    const container = document.getElementById('toast-container');
+    if (!container) return;
+    const toast = document.createElement('div');
+    const bgColor = type === 'error' ? 'bg-error' : (type === 'success' ? 'bg-primary' : 'bg-surface-container-high');
+    const textColor = type === 'error' ? 'text-on-error' : (type === 'success' ? 'text-on-primary' : 'text-on-background');
+    toast.className = `toast-notification ${bgColor} ${textColor} rounded-xl shadow-lg p-4 flex items-start gap-3 max-w-sm border border-outline-variant/20`;
+    toast.innerHTML = `<span class="material-symbols-outlined flex-shrink-0">${type === 'error' ? 'error' : (type === 'success' ? 'check_circle' : 'info')}</span>
+      <div class="flex-1 text-sm font-medium">${message}</div>
+      <button class="toast-close text-current opacity-70 hover:opacity-100">&times;</button>`;
+    container.appendChild(toast);
+    const closeBtn = toast.querySelector('.toast-close');
+    closeBtn.addEventListener('click', () => {
+      toast.classList.add('hide');
+      setTimeout(() => toast.remove(), 300);
+    });
+    setTimeout(() => {
+      if (toast.parentNode) {
+        toast.classList.add('hide');
+        setTimeout(() => toast.remove(), 300);
+      }
+    }, 4000);
+  }
+
+  // ---------- Auth State Management ----------
+let currentUser = null;
+let currentEmail = null;
+let currentPurpose = null;
+let currentOtp = null;
+
+  function loadSession() {
+    const saved = localStorage.getItem('pricebloom_user');
+    if (saved) {
+      try {
+        currentUser = JSON.parse(saved);
+        showDashboard();
+      } catch(e) { console.error(e); }
+    } else {
+      showAuthViews();
+    }
+  }
+
+  function saveSession(user) {
+    if (user) {
+      localStorage.setItem('pricebloom_user', JSON.stringify(user));
+      currentUser = user;
+      showDashboard();
+    } else {
+      localStorage.removeItem('pricebloom_user');
+      currentUser = null;
+      showAuthViews();
+    }
+  }
+
+  // UI Switching
+  const loginView = document.getElementById('login-view');
+  const signupView = document.getElementById('signup-view');
+  const dashboardView = document.getElementById('dashboard-view');
+  const authFooter = document.getElementById('auth-footer');
+  const authContainer = document.getElementById('auth-container');
+
+  function showAuthViews() {
+    if (authContainer) authContainer.classList.remove('hidden');
+    if (dashboardView) dashboardView.classList.add('hidden');
+    if (loginView) loginView.classList.remove('hidden');
+    if (signupView) signupView.classList.add('hidden');
+    if (document.getElementById('otp-verify-view')) document.getElementById('otp-verify-view').classList.add('hidden');
+    if (document.getElementById('new-password-view')) document.getElementById('new-password-view').classList.add('hidden');
+    if (authFooter) authFooter.style.display = 'flex';
+  }
+
+  function showDashboard() {
+    if (authContainer) authContainer.classList.add('hidden');
+    if (dashboardView) dashboardView.classList.remove('hidden');
+    if (authFooter) authFooter.style.display = 'none';
+    // Update dashboard user name
+    const nameSpan = document.getElementById('dashboard-user-name');
+    if (nameSpan && currentUser) {
+      nameSpan.textContent = currentUser.name || currentUser.email.split('@')[0];
+    }
+  }
+
+function showOtpVerify() {
+  loginView.classList.add('hidden');
+  signupView.classList.add('hidden');
+  document.getElementById('otp-verify-view').classList.remove('hidden');
+  document.getElementById('otp-instruction').textContent = `Enter the OTP sent to ${currentEmail} to complete ${currentPurpose === 'email_verify' ? 'verification' : 'password reset'}.`;
+}
+
+function showForgotPassword(email) {
+  const loginView = document.getElementById('login-view');
+  if (!document.getElementById('forgot-password-btn')) {
+    const forgotBtn = document.createElement('button');
+    forgotBtn.id = 'forgot-password-btn';
+    forgotBtn.className = 'mt-4 w-full text-primary font-bold hover:underline cursor-pointer';
+    forgotBtn.textContent = 'Forgot Password?';
+    forgotBtn.addEventListener('click', async () => {
+      try {
+        currentEmail = email;
+        currentPurpose = 'password_reset';
+        await sendOtp(email, 'password_reset');
+        showToast('OTP sent to your email', 'success');
+        showOtpVerify();
+      } catch (err) {
+        showToast(err.message, 'error');
+      }
+    });
+    loginView.appendChild(forgotBtn);
+  }
+}
+
+function showVerifyEmail(email) {
+  const loginView = document.getElementById('login-view');
+  if (!document.getElementById('verify-email-btn')) {
+    const verifyBtn = document.createElement('button');
+    verifyBtn.id = 'verify-email-btn';
+    verifyBtn.className = 'mt-4 w-full text-primary font-bold hover:underline cursor-pointer';
+    verifyBtn.textContent = 'Verify Email';
+    verifyBtn.addEventListener('click', async () => {
+      try {
+        currentEmail = email;
+        currentPurpose = 'email_verify';
+        await sendOtp(email, 'email_verify');
+        showToast('OTP sent to your email', 'success');
+        showOtpVerify();
+      } catch (err) {
+        showToast(err.message, 'error');
+      }
+    });
+    loginView.appendChild(verifyBtn);
+  }
+}
+
+// Mock API
+async function signupUser(name, email, password, mobile) {
+  const response = await fetch(`${API_BASE}/api/auth/register`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ Name: name, Email: email, Password: password, MobileNumber: mobile })
+  });
+  const data = await response.json();
+  if (response.ok) {
+    currentEmail = email;
+    currentPurpose = 'email_verify';
+    return { success: true, message: data.message, expiresAt: data.data.expiresAt };
+  } else {
+    throw new Error(data.message || 'Registration failed');
+  }
+}
+
+async function loginUser(email, password) {
+  const response = await fetch(`${API_BASE}/api/auth/login`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ Email: email, Password: password })
+  });
+  const data = await response.json();
+  if (response.ok) {
+    return { success: true, userId: data.data.userId };
+  } else {
+    throw new Error(data.message || 'Login failed');
+  }
+}
+
+async function sendOtp(email, purpose) {
+  const response = await fetch(`${API_BASE}/api/auth/otp/send`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ Email: email, Purpose: purpose })
+  });
+  const data = await response.json();
+  if (response.ok) {
+    return { success: true, expiresAt: data.data.expiresAt };
+  } else {
+    throw new Error(data.message || 'Failed to send OTP');
+  }
+}
+
+async function verifyOtp(email, otpCode, purpose) {
+  const response = await fetch(`${API_BASE}/api/auth/otp/verify`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ Email: email, OtpCode: otpCode, Purpose: purpose })
+  });
+  const data = await response.json();
+  if (response.ok) {
+    return { success: true, message: data.message };
+  } else {
+    throw new Error(data.message || 'OTP verification failed');
+  }
+}
+
+function logoutUser() {
+  saveSession(null);
+  showToast('You have been signed out', 'info');
+}
+
+  // Event Handlers
+  document.getElementById('login-form')?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const email = document.getElementById('login-email').value.trim();
+    const password = document.getElementById('login-password').value;
+    if (!email || !password) {
+      showToast('Please enter email and password', 'error');
+      return;
+    }
+    try {
+      const result = await loginUser(email, password);
+      saveSession({ email: email, name: email.split('@')[0], id: result.userId });
+      showToast(`Welcome back, ${email.split('@')[0]}!`, 'success');
+      setTimeout(() => {
+        window.location.href = 'home.html';
+      }, 500);
+    } catch (err) {
+      showToast(err.message, 'error');
+      if (err.message.includes('Invalid email or password')) {
+        showForgotPassword(email);
+      } else if (err.message.includes('Please verify your email first')) {
+        showVerifyEmail(email);
+      }
+    }
+  });
+
+  document.getElementById('forgot-password-btn')?.addEventListener('click', async () => {
+    const email = document.getElementById('login-email').value.trim();
+    if (!email) {
+      showToast('Please enter your email first', 'error');
+      return;
+    }
+    try {
+      currentEmail = email;
+      currentPurpose = 'password_reset';
+      await sendOtp(email, 'password_reset');
+      showToast('OTP sent to your email', 'success');
+      showOtpVerify();
+    } catch (err) {
+      showToast(err.message, 'error');
+    }
+  });
+
+  document.getElementById('signup-form')?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const name = document.getElementById('signup-name').value.trim();
+    const email = document.getElementById('signup-email').value.trim();
+    const password = document.getElementById('signup-password').value;
+    const mobile = document.getElementById('signup-mobile').value.trim();
+    const terms = document.getElementById('signup-terms')?.checked;
+    if (!name || !email || !password || !mobile) {
+      showToast('Please fill all fields', 'error');
+      return;
+    }
+    if (password.length < 3) {
+      showToast('Password must be at least 3 characters', 'error');
+      return;
+    }
+    if (!terms) {
+      showToast('Please agree to the Terms of Service', 'error');
+      return;
+    }
+    try {
+      const result = await signupUser(name, email, password, mobile);
+      showToast(result.message, 'success');
+      showOtpVerify();
+    } catch (err) {
+      showToast(err.message, 'error');
+    }
+  });
+
+  // Switch Views
+  document.getElementById('switch-to-signup-btn')?.addEventListener('click', () => {
+    loginView.classList.add('hidden');
+    signupView.classList.remove('hidden');
+    // Remove any added buttons
+    const forgotBtn = document.getElementById('forgot-password-btn');
+    if (forgotBtn) forgotBtn.remove();
+    const verifyBtn = document.getElementById('verify-email-btn');
+    if (verifyBtn) verifyBtn.remove();
+  });
+  document.getElementById('switch-to-login-btn')?.addEventListener('click', () => {
+    signupView.classList.add('hidden');
+    loginView.classList.remove('hidden');
+    // Remove any added buttons
+    const forgotBtn = document.getElementById('forgot-password-btn');
+    if (forgotBtn) forgotBtn.remove();
+    const verifyBtn = document.getElementById('verify-email-btn');
+    if (verifyBtn) verifyBtn.remove();
+  });
+
+  // Logout from dashboard
+  document.getElementById('logout-from-dashboard')?.addEventListener('click', () => {
+    logoutUser();
+    setTimeout(() => {
+      window.location.href = 'home.html';
+    }, 500);
+  });
+
+  // OTP verify
+  document.getElementById('otp-verify-form')?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const otpCode = document.getElementById('otp-code').value.trim();
+    if (!otpCode) {
+      showToast('Please enter OTP code', 'error');
+      return;
+    }
+    try {
+      const result = await verifyOtp(currentEmail, otpCode, currentPurpose);
+      showToast(result.message, 'success');
+      if (currentPurpose === 'email_verify' || currentPurpose === 'password_reset') {
+        // After verify, go to dashboard
+        saveSession({ email: currentEmail, name: currentEmail.split('@')[0], id: 'verified' });
+        setTimeout(() => {
+          window.location.href = 'home.html';
+        }, 500);
+      }
+    } catch (err) {
+      showToast(err.message, 'error');
+    }
+  });
+
+  document.getElementById('resend-otp-btn')?.addEventListener('click', async () => {
+    try {
+      await sendOtp(currentEmail, currentPurpose);
+      showToast('OTP resent', 'success');
+    } catch (err) {
+      showToast(err.message, 'error');
+    }
+  });
+
+  document.getElementById('go-to-login-btn')?.addEventListener('click', () => {
+    showAuthViews();
+  });
+
+  // Add tracker button on dashboard
+  document.getElementById('add-tracker-from-dash')?.addEventListener('click', () => {
+    showToast('Tracker feature coming soon! You will be able to add products from Amazon & Flipkart.', 'info');
+  });
+
+  // Toggle password visibility
+  document.querySelectorAll('.toggle-password').forEach(icon => {
+    icon.addEventListener('click', function() {
+      const input = this.closest('.relative')?.querySelector('input');
+      if (input) {
+        input.type = input.type === 'password' ? 'text' : 'password';
+        this.textContent = input.type === 'password' ? 'visibility' : 'visibility_off';
+      }
+    });
+  });
+
+  // Prevent any navigation away from home page (keeping on same page)
+  // All links that might redirect are prevented to stay within this single-page experience
+  document.querySelectorAll('a[href="#"]').forEach(link => {
+    link.addEventListener('click', (e) => e.preventDefault());
+  });
+  document.querySelectorAll('a[href]').forEach(link => {
+    if (link.getAttribute('href') && link.getAttribute('href').startsWith('http')) return;
+    if (link.getAttribute('href') && !link.getAttribute('href').startsWith('#')) {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        showToast('This demo keeps you on the home page. Use the auth forms above.', 'info');
+      });
+    }
+  });
+
+  // Initialize
+  loadSession();
+</script>
+</body>
+</html>

@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Profile &amp; Settings - PriceBloomBuddy</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="config.js"></script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "tertiary": "#494bd6",
+                      "error-container": "#ffdad6",
+                      "on-secondary-fixed": "#111c2d",
+                      "surface-container-high": "#dce9ff",
+                      "on-primary": "#ffffff",
+                      "on-tertiary": "#ffffff",
+                      "primary-container": "#22c55e",
+                      "surface": "#f8f9ff",
+                      "on-tertiary-fixed": "#07006c",
+                      "error": "#ba1a1a",
+                      "outline-variant": "#bccbb9",
+                      "on-tertiary-fixed-variant": "#2f2ebe",
+                      "primary-fixed-dim": "#4ae176",
+                      "on-surface": "#0b1c30",
+                      "on-secondary": "#ffffff",
+                      "surface-container-low": "#eff4ff",
+                      "surface-container-highest": "#d3e4fe",
+                      "on-error": "#ffffff",
+                      "surface-container": "#e5eeff",
+                      "tertiary-fixed": "#e1e0ff",
+                      "tertiary-container": "#a1a3ff",
+                      "secondary-fixed": "#d8e3fb",
+                      "primary-fixed": "#6bff8f",
+                      "on-background": "#0b1c30",
+                      "surface-bright": "#f8f9ff",
+                      "surface-dim": "#cbdbf5",
+                      "on-primary-fixed": "#002109",
+                      "primary": "#006e2f",
+                      "surface-container-lowest": "#ffffff",
+                      "secondary-fixed-dim": "#bcc7de",
+                      "on-primary-fixed-variant": "#005321",
+                      "on-secondary-container": "#586377",
+                      "inverse-surface": "#213145",
+                      "secondary": "#545f73",
+                      "surface-tint": "#006e2f",
+                      "on-error-container": "#93000a",
+                      "on-surface-variant": "#3d4a3d",
+                      "tertiary-fixed-dim": "#c0c1ff",
+                      "on-primary-container": "#004b1e",
+                      "inverse-primary": "#4ae176",
+                      "inverse-on-surface": "#eaf1ff",
+                      "background": "#f8f9ff",
+                      "secondary-container": "#d5e0f8",
+                      "outline": "#6d7b6c",
+                      "on-secondary-fixed-variant": "#3c475a",
+                      "surface-variant": "#d3e4fe",
+                      "on-tertiary-container": "#2623b8"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "unit": "8px",
+                      "stack-xs": "4px",
+                      "stack-xl": "48px",
+                      "gutter": "24px",
+                      "margin-mobile": "16px",
+                      "margin-desktop": "32px",
+                      "container-max": "1280px",
+                      "stack-lg": "24px",
+                      "stack-sm": "8px",
+                      "stack-md": "16px"
+              },
+              "fontFamily": {
+                      "label-sm": ["Inter"],
+                      "h1": ["Inter"],
+                      "h2": ["Inter"],
+                      "body-lg": ["Inter"],
+                      "h3": ["Inter"],
+                      "body-sm": ["Inter"],
+                      "body-md": ["Inter"],
+                      "label-md": ["Inter"]
+              },
+              "fontSize": {
+                      "label-sm": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                      "h1": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "h2": ["32px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "body-lg": ["18px", {"lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400"}],
+                      "h3": ["24px", {"lineHeight": "1.4", "letterSpacing": "0", "fontWeight": "600"}],
+                      "body-sm": ["14px", {"lineHeight": "1.5", "letterSpacing": "0", "fontWeight": "400"}],
+                      "body-md": ["16px", {"lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400"}],
+                      "label-md": ["14px", {"lineHeight": "1", "letterSpacing": "0.02em", "fontWeight": "600"}]
+              }
+            },
+          },
+        }
+      </script>
+</head>
+<body class="bg-background text-on-surface">
+<!-- TopNavBar -->
+<nav class="bg-surface/90 backdrop-blur-md sticky top-0 z-50 border-b border-outline-variant/30 shadow-sm">
+  <div class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop py-stack-sm max-w-container-max mx-auto">
+    <div class="flex items-center gap-gutter">
+      <button id="nav-home" class="font-h2 text-h2 font-bold text-primary tracking-tight hover:opacity-90 transition-opacity cursor-pointer">PriceBloomBuddy</button>
+      <div class="hidden md:flex items-center gap-stack-lg">
+        <button id="nav-dashboard" class="text-secondary font-medium hover:text-primary transition-colors cursor-pointer">Dashboard</button>
+        <button id="nav-trackers" class="text-secondary font-medium hover:text-primary transition-colors cursor-pointer">Trackers</button>
+        <button id="nav-pricing" class="text-secondary font-medium hover:text-primary transition-colors cursor-pointer">Pricing</button>
+      </div>
+    </div>
+    <div class="flex items-center gap-stack-md">
+      <button id="add-link-btn" class="hidden md:flex items-center gap-stack-xs bg-primary text-on-primary px-stack-md py-stack-sm rounded-lg font-label-md hover:bg-primary/90 transition-all active:scale-95 cursor-pointer"><span class="material-symbols-outlined">add</span>Add Link</button>
+      <div class="flex gap-stack-sm text-secondary">
+        <button id="notifications-btn" class="flex items-center justify-center text-inherit hover:bg-surface-container-low transition-all rounded-full cursor-pointer">
+          <span class="material-symbols-outlined p-stack-sm">notifications</span>
+        </button>
+        <div class="relative">
+          <button id="account-menu-btn" class="flex items-center justify-center text-inherit hover:bg-surface-container-low transition-all rounded-full cursor-pointer">
+            <button id="auth-nav-btn" class="flex items-center justify-center gap-stack-xs bg-primary text-on-primary px-4 py-2 rounded-lg font-label-md hover:bg-primary/90 transition-all active:scale-95 cursor-pointer">
+              <span class="material-symbols-outlined text-[20px]">account_circle</span>
+              <span id="auth-nav-text">Sign In</span>
+            </button>
+          </button>
+          <div id="account-dropdown" class="hidden absolute right-0 mt-2 w-48 bg-surface rounded-xl shadow-lg border border-outline-variant/30 z-50 overflow-hidden">
+            <div id="dropdown-loggedout-view" class="py-2">
+              <button id="login-dropdown-btn" class="w-full text-left px-4 py-2 text-sm text-on-background hover:bg-surface-container-low transition-colors font-medium cursor-pointer">Sign In</button>
+              <button id="signup-dropdown-btn" class="w-full text-left px-4 py-2 text-sm text-on-background hover:bg-surface-container-low transition-colors font-medium cursor-pointer">Create Account</button>
+            </div>
+            <div id="dropdown-loggedin-view" class="hidden py-2">
+              <div class="px-4 py-2 text-sm font-semibold text-primary border-b border-outline-variant/20" id="dropdown-user-email">user@example.com</div>
+              <button id="myprofile-dropdown-btn" class="w-full text-left px-4 py-2 text-sm text-on-background hover:bg-surface-container-low transition-colors cursor-pointer">My Profile</button>
+              <button id="logout-dropdown-btn" class="w-full text-left px-4 py-2 text-sm text-error hover:bg-surface-container-low transition-colors cursor-pointer">Sign Out</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- Main Content Area -->
+<main class="min-h-screen flex flex-col">
+<!-- Profile Page Content -->
+<div class="flex-1 p-margin-mobile md:p-margin-desktop max-w-4xl mx-auto w-full">
+<div class="mb-stack-xl">
+<h2 class="text-h2 font-h2 text-on-surface mb-stack-xs">Profile &amp; Settings</h2>
+<p class="text-body-md text-secondary">Manage your account details and notification preferences to optimize your savings.</p>
+</div>
+<!-- Bento Grid Layout for Settings -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<!-- Section 1: Personal Details & Status -->
+<div class="space-y-gutter">
+<!-- Personal Details Card -->
+<section class="bg-surface-container-lowest p-stack-lg rounded-xl shadow-sm border border-outline-variant/10">
+<div class="flex items-center gap-stack-sm mb-stack-lg border-b border-outline-variant/20 pb-stack-sm">
+<span class="material-symbols-outlined text-primary" data-icon="person">person</span>
+<h3 class="text-h3 font-h3">Personal Details</h3>
+</div>
+<div class="space-y-stack-md">
+<div>
+<label class="block text-label-md font-label-md text-secondary mb-stack-xs">Name</label>
+<input id="profile-name" class="w-full bg-surface border border-outline/20 rounded-lg p-stack-sm text-body-md focus:border-primary focus:ring-1 focus:ring-primary outline-none" type="text" placeholder="Your Name"/>
+</div>
+<div>
+<label class="block text-label-md font-label-md text-secondary mb-stack-xs">Email</label>
+<div class="relative">
+<input id="profile-email" class="w-full bg-surface-container-low border border-outline/20 rounded-lg p-stack-sm text-body-md text-secondary-fixed-variant cursor-not-allowed" disabled="" type="email" placeholder="your@email.com"/>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-secondary-fixed-variant text-[20px]" data-icon="lock">lock</span>
+</div>
+</div>
+<div>
+<label class="block text-label-md font-label-md text-secondary mb-stack-xs">Mobile Number</label>
+<input id="profile-mobile" class="w-full bg-surface border border-outline/20 rounded-lg p-stack-sm text-body-md focus:border-primary focus:ring-1 focus:ring-primary outline-none" type="tel" placeholder="1234567890"/>
+</div>
+</div>
+</section>
+<!-- Account Status Card -->
+<section class="bg-surface-container p-stack-lg rounded-xl shadow-sm border border-outline-variant/10">
+<div class="flex items-center gap-stack-sm mb-stack-lg">
+<span class="material-symbols-outlined text-primary" data-icon="verified_user">verified_user</span>
+<h3 class="text-h3 font-h3">Account Status</h3>
+</div>
+<div class="flex flex-col gap-stack-md">
+<div class="flex justify-between items-center bg-surface-container-lowest p-stack-sm rounded-lg px-stack-md">
+<span class="text-label-md font-label-md text-secondary">Email Verified</span>
+<span class="bg-primary-container/10 text-primary px-stack-md py-1 rounded-full text-label-sm font-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="check_circle" data-weight="fill" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                                    Verified
+                                </span>
+</div>
+<div class="flex justify-between items-center bg-surface-container-lowest p-stack-sm rounded-lg px-stack-md">
+<span class="text-label-md font-label-md text-secondary">Member Since</span>
+<span id="member-since" class="text-body-md font-bold text-on-surface">Loading...</span>
+</div>
+</div>
+</section>
+</div>
+<!-- Section 2: Security & Notifications -->
+<div class="space-y-gutter">
+<!-- Security Section -->
+<section class="bg-surface-container-lowest p-stack-lg rounded-xl shadow-sm border border-outline-variant/10">
+<div class="flex items-center gap-stack-sm mb-stack-lg border-b border-outline-variant/20 pb-stack-sm">
+<span class="material-symbols-outlined text-primary" data-icon="security">security</span>
+<h3 class="text-h3 font-h3">Security</h3>
+</div>
+<div class="space-y-stack-md">
+<label class="block text-label-md font-label-md text-secondary mb-stack-xs">Password</label>
+<div class="flex gap-stack-sm items-center">
+<div class="relative flex-1">
+<input class="w-full bg-surface-container-low border border-outline/20 rounded-lg p-stack-sm text-body-md" disabled="" type="password" value="********"/>
+</div>
+<button class="px-stack-md py-stack-sm text-primary font-bold border-2 border-primary-container rounded-lg hover:bg-primary-container/10 transition-colors">
+                                    Update
+                                </button>
+</div>
+<p class="text-body-sm text-secondary-fixed-variant">Last changed 4 months ago. We recommend a unique password to protect your savings data.</p>
+</div>
+</section>
+<!-- Notification Preferences -->
+<section class="bg-surface-container-lowest p-stack-lg rounded-xl shadow-sm border border-outline-variant/10">
+<div class="flex items-center gap-stack-sm mb-stack-lg border-b border-outline-variant/20 pb-stack-sm">
+<span class="material-symbols-outlined text-primary" data-icon="notifications_active">notifications_active</span>
+<h3 class="text-h3 font-h3">Notification Preferences</h3>
+</div>
+<div class="space-y-stack-lg">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-stack-md">
+<span class="material-symbols-outlined text-secondary" data-icon="mail">mail</span>
+<div>
+<p class="text-label-md font-label-md text-on-surface">Email Notifications</p>
+<p class="text-body-sm text-secondary">Price drops and monthly savings reports</p>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input id="profile-notify-email" checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-secondary-fixed-dim peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-stack-md">
+<span class="material-symbols-outlined text-secondary" data-icon="chat">chat</span>
+<div>
+<p class="text-label-md font-label-md text-on-surface">WhatsApp Notifications</p>
+<p class="text-body-sm text-secondary">Real-time alerts for lightning deals</p>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input id="profile-notify-whatsapp" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-secondary-fixed-dim peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-stack-md">
+<span class="material-symbols-outlined text-secondary" data-icon="sms">sms</span>
+<div>
+<p class="text-label-md font-label-md text-on-surface">SMS Notifications</p>
+<p class="text-body-sm text-secondary">Critical account security alerts only</p>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input id="profile-notify-sms" checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-secondary-fixed-dim peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+</div>
+</section>
+</div>
+</div>
+<!-- Update Action -->
+<div class="mt-stack-xl flex flex-col gap-stack-md pt-stack-lg border-t border-outline-variant/30 md:flex-row md:justify-between">
+  <button id="logout-btn" class="px-stack-xl py-stack-sm bg-error text-on-error font-bold rounded-lg hover:bg-error/90 transition-colors">
+    Logout
+  </button>
+  <div class="flex justify-end gap-stack-md">
+    <button class="px-stack-xl py-stack-sm bg-surface-dim text-on-surface font-bold rounded-lg hover:bg-outline-variant transition-colors">
+      Discard Changes
+    </button>
+    <button id="update-profile-btn" class="px-stack-xl py-stack-sm bg-primary text-on-primary font-bold rounded-lg shadow-lg hover:brightness-110 transition-all active:scale-95">
+      Update Profile
+    </button>
+  </div>
+</div>
+</div>
+<!-- Footer Anchor -->
+<footer class="bg-surface-dim mt-auto py-stack-xl px-margin-desktop w-full border-t border-outline-variant/20">
+<div class="max-w-container-max mx-auto flex flex-col md:flex-row justify-between items-center gap-stack-md">
+<div class="flex flex-col gap-stack-xs">
+<p class="text-label-md font-label-md font-bold text-on-surface">PriceBloomBuddy</p>
+<p class="text-body-sm font-body-sm text-secondary-fixed-variant">© 2024 PriceBloomBuddy. Growing your savings.</p>
+</div>
+<div class="flex gap-stack-lg">
+<a class="text-label-sm font-label-sm text-secondary-fixed-variant hover:text-primary transition-colors focus:underline decoration-2 decoration-primary" href="#">Privacy Policy</a>
+<a class="text-label-sm font-label-sm text-secondary-fixed-variant hover:text-primary transition-colors focus:underline decoration-2 decoration-primary" href="#">Terms of Service</a>
+<a class="text-label-sm font-label-sm text-secondary-fixed-variant hover:text-primary transition-colors focus:underline decoration-2 decoration-primary" href="#">Help Center</a>
+<a class="text-label-sm font-label-sm text-secondary-fixed-variant hover:text-primary transition-colors focus:underline decoration-2 decoration-primary" href="#">API Documentation</a>
+</div>
+</div>
+</footer>
+</main>
+<script>
+  // ---------- Toast Notifications ----------
+  function showToast(message, type = 'info') {
+    const container = document.createElement('div');
+    container.className = 'fixed top-20 right-4 z-[100]';
+    const toast = document.createElement('div');
+    const bgColor = type === 'error' ? 'bg-error' : (type === 'success' ? 'bg-primary' : 'bg-surface-container-high');
+    const textColor = type === 'error' ? 'text-on-error' : (type === 'success' ? 'text-on-primary' : 'text-on-background');
+    toast.className = `${bgColor} ${textColor} rounded-xl shadow-lg p-4 flex items-center gap-3 max-w-sm border border-outline-variant/20`;
+    toast.innerHTML = `<span class="material-symbols-outlined">${type === 'error' ? 'error' : (type === 'success' ? 'check_circle' : 'info')}</span>
+      <div class="flex-1 text-sm font-medium">${message}</div>`;
+    container.appendChild(toast);
+    document.body.appendChild(container);
+    setTimeout(() => container.remove(), 4000);
+  }
+
+  // ---------- Profile Management ----------
+  let currentUser = null;
+
+  function loadSession() {
+    const saved = localStorage.getItem('pricebloom_user');
+    if (saved) {
+      try {
+        currentUser = JSON.parse(saved);
+        console.log('User found in session:', currentUser);
+        loadUserProfile();
+      } catch(e) {
+        console.error('Session parse error:', e);
+        showToast('Session error', 'error');
+      }
+    } else {
+      console.warn('No user session found');
+      showToast('Please sign in first', 'error');
+      setTimeout(() => window.location.href = 'createaccout.html', 1000);
+    }
+  }
+
+  async function loadUserProfile() {
+    if (!currentUser || !currentUser.id) {
+      console.error('User ID not found');
+      showToast('User ID not found', 'error');
+      return;
+    }
+
+    try {
+      const url = `${API_BASE}/api/userprofile/${currentUser.id}`;
+      console.log('Fetching profile from:', url);
+      
+      const response = await fetch(url, {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' }
+      });
+
+      console.log('Response status:', response.status);
+      const data = await response.json();
+      console.log('API Response:', data);
+
+      if (response.ok && data.success) {
+        const user = data.data;
+        console.log('Profile data received:', user);
+
+        // Populate form fields
+        document.getElementById('profile-name').value = user.name || '';
+        document.getElementById('profile-email').value = user.email || '';
+        document.getElementById('profile-mobile').value = user.mobileNumber || '';
+        document.getElementById('profile-notify-email').checked = user.notifyEmail !== false;
+        document.getElementById('profile-notify-whatsapp').checked = user.notifyWhatsapp === true;
+        document.getElementById('profile-notify-sms').checked = user.notifySms === true;
+        
+        // Update member since date
+        const createdDate = new Date(user.createdAt).toLocaleDateString();
+        document.getElementById('member-since').textContent = createdDate;
+
+        showToast('Profile loaded successfully', 'success');
+      } else {
+        console.error('API returned error:', data.message);
+        showToast(data.message || 'Failed to load profile', 'error');
+      }
+    } catch (err) {
+      console.error('Error loading profile:', err);
+      showToast('Error: ' + err.message, 'error');
+    }
+  }
+
+  async function updateUserProfile() {
+    if (!currentUser || !currentUser.id) {
+      showToast('User not found', 'error');
+      return;
+    }
+
+    const name = document.getElementById('profile-name').value.trim();
+    const mobile = document.getElementById('profile-mobile').value.trim();
+    const notifyEmail = document.getElementById('profile-notify-email').checked;
+    const notifyWhatsapp = document.getElementById('profile-notify-whatsapp').checked;
+    const notifySms = document.getElementById('profile-notify-sms').checked;
+
+    if (!name) {
+      showToast('Name cannot be empty', 'error');
+      return;
+    }
+    if (!mobile) {
+      showToast('Mobile number cannot be empty', 'error');
+      return;
+    }
+
+    try {
+      const url = `${API_BASE}/api/userprofile/${currentUser.id}`;
+      console.log('Updating profile at:', url);
+      
+      const response = await fetch(url, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: name,
+          mobileNumber: mobile,
+          notifyEmail: notifyEmail,
+          notifyWhatsapp: notifyWhatsapp,
+          notifySms: notifySms
+        })
+      });
+
+      console.log('Update response status:', response.status);
+      const data = await response.json();
+      console.log('Update response:', data);
+
+      if (response.ok && data.success) {
+        showToast(data.message || 'Profile updated successfully', 'success');
+        setTimeout(() => loadUserProfile(), 500);
+      } else {
+        showToast(data.message || 'Failed to update profile', 'error');
+      }
+    } catch (err) {
+      console.error('Error updating profile:', err);
+      showToast('Error: ' + err.message, 'error');
+    }
+  }
+
+  // Event Listeners
+  document.getElementById('update-profile-btn')?.addEventListener('click', updateUserProfile);
+  
+  document.getElementById('nav-home')?.addEventListener('click', () => window.location.href = 'home.html');
+  
+  document.getElementById('account-menu-btn')?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const dropdown = document.getElementById('account-dropdown');
+    dropdown.classList.toggle('hidden');
+  });
+  
+  document.getElementById('myprofile-dropdown-btn')?.addEventListener('click', () => window.location.href = 'profile.html');
+  
+  const logoutAction = () => {
+    localStorage.removeItem('pricebloom_user');
+    showToast('Logged out', 'success');
+    setTimeout(() => window.location.href = 'home.html', 500);
+  };
+
+  document.getElementById('logout-dropdown-btn')?.addEventListener('click', logoutAction);
+  document.getElementById('logout-btn')?.addEventListener('click', logoutAction);
+  
+  document.getElementById('login-dropdown-btn')?.addEventListener('click', () => window.location.href = 'createaccout.html');
+  document.getElementById('signup-dropdown-btn')?.addEventListener('click', () => window.location.href = 'createaccout.html');
+
+  // Update navbar based on login status
+  function updateNavBar() {
+    const saved = localStorage.getItem('pricebloom_user');
+    const loggedoutView = document.getElementById('dropdown-loggedout-view');
+    const loggedinView = document.getElementById('dropdown-loggedin-view');
+    const authNavBtn = document.getElementById('auth-nav-btn');
+    
+    if (saved) {
+      try {
+        const user = JSON.parse(saved);
+        loggedoutView.classList.add('hidden');
+        loggedinView.classList.remove('hidden');
+        document.getElementById('dropdown-user-email').textContent = user.email || user.name;
+        authNavBtn.innerHTML = `<span class="material-symbols-outlined text-[20px]">account_circle</span><span id="auth-nav-text">${user.name || 'Profile'}</span>`;
+      } catch(e) { console.error(e); }
+    } else {
+      loggedoutView.classList.remove('hidden');
+      loggedinView.classList.add('hidden');
+      authNavBtn.innerHTML = `<span class="material-symbols-outlined text-[20px]">account_circle</span><span id="auth-nav-text">Sign In</span>`;
+    }
+  }
+
+  // Close dropdown when clicking outside
+  document.addEventListener('click', (e) => {
+    const dropdown = document.getElementById('account-dropdown');
+    const menuBtn = document.getElementById('account-menu-btn');
+    if (dropdown && !dropdown.parentElement.contains(e.target) && e.target !== menuBtn) {
+      dropdown.classList.add('hidden');
+    }
+  });
+
+  // Initialize on page load
+  window.addEventListener('DOMContentLoaded', () => {
+    updateNavBar();
+    loadSession();
+  });
+</script>
+</body></html>
