@@ -411,6 +411,7 @@ let currentUser = null;
 let currentEmail = null;
 let currentPurpose = null;
 let currentOtp = null;
+let currentUserId = null;
 
   function loadSession() {
     const saved = localStorage.getItem('pricebloom_user');
@@ -424,13 +425,31 @@ let currentOtp = null;
     }
   }
 
+  function redirectAfterLogin(defaultUrl = 'index.html') {
+    const redirectUrl = localStorage.getItem('pbb_redirect_after_login');
+    if (redirectUrl) {
+      localStorage.removeItem('pbb_redirect_after_login');
+      window.location.href = redirectUrl;
+      return;
+    }
+    window.location.href = defaultUrl;
+  }
+
   function saveSession(user) {
     if (user) {
-      localStorage.setItem('pricebloom_user', JSON.stringify(user));
+      localStorage.setItem(typeof PBB_USER_STORAGE_KEY !== 'undefined' ? PBB_USER_STORAGE_KEY : 'pricebloom_user', JSON.stringify(user));
+      localStorage.setItem(typeof PBB_AUTH_TOKEN_KEY !== 'undefined' ? PBB_AUTH_TOKEN_KEY : 'pbb_auth_token', 'authenticated');
+      localStorage.setItem(typeof PBB_USER_EMAIL_KEY !== 'undefined' ? PBB_USER_EMAIL_KEY : 'pbb_user_email', user.email || 'user@pricebloom.com');
+      if (user.id) {
+        localStorage.setItem(typeof PBB_USER_ID_KEY !== 'undefined' ? PBB_USER_ID_KEY : 'pbb_user_id', user.id);
+      }
       currentUser = user;
       showDashboard();
     } else {
-      localStorage.removeItem('pricebloom_user');
+      localStorage.removeItem(typeof PBB_USER_STORAGE_KEY !== 'undefined' ? PBB_USER_STORAGE_KEY : 'pricebloom_user');
+      localStorage.removeItem(typeof PBB_AUTH_TOKEN_KEY !== 'undefined' ? PBB_AUTH_TOKEN_KEY : 'pbb_auth_token');
+      localStorage.removeItem(typeof PBB_USER_EMAIL_KEY !== 'undefined' ? PBB_USER_EMAIL_KEY : 'pbb_user_email');
+      localStorage.removeItem(typeof PBB_USER_ID_KEY !== 'undefined' ? PBB_USER_ID_KEY : 'pbb_user_id');
       currentUser = null;
       showAuthViews();
     }
@@ -539,10 +558,13 @@ async function loginUser(email, password) {
     body: JSON.stringify({ Email: email, Password: password })
   });
   const data = await response.json();
-  if (response.ok) {
-    return { success: true, userId: data.data.userId };
+  if (response.ok && data) {
+    if (data.success === false) {
+      throw new Error(data.message || data.error || 'Login failed');
+    }
+    return { success: true, userId: data.data?.userId || data.data?.id || data.userId || null };
   } else {
-    throw new Error(data.message || 'Login failed');
+    throw new Error(data.message || data.error || 'Login failed');
   }
 }
 
@@ -590,10 +612,11 @@ function logoutUser() {
     }
     try {
       const result = await loginUser(email, password);
+      currentUserId = result.userId;
       saveSession({ email: email, name: email.split('@')[0], id: result.userId });
       showToast(`Welcome back, ${email.split('@')[0]}!`, 'success');
       setTimeout(() => {
-        window.location.href = 'home.html';
+        redirectAfterLogin();
       }, 500);
     } catch (err) {
       showToast(err.message, 'error');
@@ -674,7 +697,7 @@ function logoutUser() {
   document.getElementById('logout-from-dashboard')?.addEventListener('click', () => {
     logoutUser();
     setTimeout(() => {
-      window.location.href = 'home.html';
+      window.location.href = 'index.html';
     }, 500);
   });
 
@@ -689,12 +712,18 @@ function logoutUser() {
     try {
       const result = await verifyOtp(currentEmail, otpCode, currentPurpose);
       showToast(result.message, 'success');
-      if (currentPurpose === 'email_verify' || currentPurpose === 'password_reset') {
-        // After verify, go to dashboard
-        saveSession({ email: currentEmail, name: currentEmail.split('@')[0], id: 'verified' });
-        setTimeout(() => {
-          window.location.href = 'home.html';
-        }, 500);
+      if (currentPurpose === 'email_verify') {
+        showToast('Email verified successfully. Please sign in to continue.', 'success');
+        currentPurpose = null;
+        if (document.getElementById('login-email')) document.getElementById('login-email').value = currentEmail;
+        if (document.getElementById('otp-code')) document.getElementById('otp-code').value = '';
+        showAuthViews();
+      } else if (currentPurpose === 'password_reset') {
+        showToast('OTP verified. Please sign in with your new password.', 'success');
+        currentPurpose = null;
+        if (document.getElementById('login-email')) document.getElementById('login-email').value = currentEmail;
+        if (document.getElementById('otp-code')) document.getElementById('otp-code').value = '';
+        showAuthViews();
       }
     } catch (err) {
       showToast(err.message, 'error');

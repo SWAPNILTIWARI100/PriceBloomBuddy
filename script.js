@@ -35,7 +35,7 @@ function saveSession(user) {
 function logout() {
   saveSession(null);
   showToast('You have been signed out', 'info');
-  redirectTo('home.html');
+  redirectTo('index.html');
 }
 
 // ---------- Toast Notifications ----------
@@ -76,7 +76,7 @@ function redirectTo(page) {
   window.location.href = page;
 }
 
-function requireAuth(redirectPage = 'createaccout.html') {
+function requireAuth(redirectPage = 'createaccount.html') {
   if (!currentUser) {
     showToast('Please sign in to access this page', 'error');
     setTimeout(() => {
@@ -130,7 +130,7 @@ function updateUIForLoggedOutUser() {
     authNavText.textContent = 'Sign In';
     authNavBtn.onclick = (e) => {
       e.preventDefault();
-      redirectTo('createaccout.html');
+      redirectTo('createaccount.html');
     };
   }
 
@@ -179,8 +179,8 @@ function signupUser(name, email, password) {
 // ---------- Navigation Setup ----------
 function setupNavigation() {
   // Home nav
-  document.getElementById('nav-home')?.addEventListener('click', () => redirectTo('home.html'));
-  document.getElementById('footer-home')?.addEventListener('click', () => redirectTo('home.html'));
+  document.getElementById('nav-home')?.addEventListener('click', () => redirectTo('index.html'));
+  document.getElementById('footer-home')?.addEventListener('click', () => redirectTo('index.html'));
 
   // Dashboard nav (Protected)
   document.getElementById('nav-dashboard')?.addEventListener('click', () => {
@@ -219,8 +219,8 @@ function setupNavigation() {
   });
 
   // Auth buttons in dropdown
-  document.getElementById('login-dropdown-btn')?.addEventListener('click', () => redirectTo('createaccout.html'));
-  document.getElementById('signup-dropdown-btn')?.addEventListener('click', () => redirectTo('createaccout.html'));
+  document.getElementById('login-dropdown-btn')?.addEventListener('click', () => redirectTo('createaccount.html'));
+  document.getElementById('signup-dropdown-btn')?.addEventListener('click', () => redirectTo('createaccount.html'));
   document.getElementById('myprofile-dropdown-btn')?.addEventListener('click', () => {
     if (currentUser) redirectTo('profile.html');
     else requireAuth();
@@ -232,7 +232,7 @@ function setupNavigation() {
     btn?.addEventListener('click', (e) => {
       e.preventDefault();
       if (currentUser) redirectTo('dashboard.html');
-      else redirectTo('createaccout.html');
+      else redirectTo('createaccount.html');
     });
   });
 

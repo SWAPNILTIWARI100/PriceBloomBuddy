@@ -1,197 +1,1399 @@
 <!DOCTYPE html>
 <html class="light" lang="en">
 <head>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-  <title>Dashboard - PriceBloomBuddy</title>
-  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet"/>
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-  <script id="tailwind-config">
-    tailwind.config = {
-      darkMode: "class",
-      theme: {
-        extend: {
-          "colors": {
-            "surface-variant": "#d3e4fe",
-            "on-surface-variant": "#3d4a3d",
-            "surface-bright": "#f8f9ff",
-            "secondary-fixed-dim": "#bcc7de",
-            "on-secondary": "#ffffff",
-            "on-tertiary-container": "#2623b8",
-            "on-tertiary-fixed-variant": "#2f2ebe",
-            "inverse-surface": "#213145",
-            "on-primary-container": "#004b1e",
-            "primary-fixed-dim": "#4ae176",
-            "surface-container": "#e5eeff",
-            "surface-container-lowest": "#ffffff",
-            "secondary": "#545f73",
-            "on-background": "#0b1c30",
-            "on-primary-fixed-variant": "#005321",
-            "on-primary-fixed": "#002109",
-            "on-error": "#ffffff",
-            "on-error-container": "#93000a",
-            "surface-container-high": "#dce9ff",
-            "outline": "#6d7b6c",
-            "on-tertiary-fixed": "#07006c",
-            "error": "#ba1a1a",
-            "on-primary": "#ffffff",
-            "surface-container-highest": "#d3e4fe",
-            "primary": "#006e2f",
-            "primary-fixed": "#6bff8f",
-            "on-secondary-container": "#586377",
-            "tertiary-container": "#a1a3ff",
-            "error-container": "#ffdad6",
-            "secondary-container": "#d5e0f8",
-            "surface-tint": "#006e2f",
-            "tertiary-fixed": "#e1e0ff",
-            "inverse-primary": "#4ae176",
-            "primary-container": "#22c55e",
-            "on-surface": "#0b1c30",
-            "surface-container-low": "#eff4ff",
-            "tertiary": "#494bd6",
-            "surface": "#f8f9ff",
-            "on-tertiary": "#ffffff",
-            "secondary-fixed": "#d8e3fb",
-            "background": "#f8f9ff",
-            "outline-variant": "#bccbb9",
-            "surface-dim": "#cbdbf5",
-            "inverse-on-surface": "#eaf1ff",
-            "on-secondary-fixed": "#111c2d",
-            "on-secondary-fixed-variant": "#3c475a"
-          },
-          "spacing": {
-            "stack-lg": "24px",
-            "stack-md": "16px",
-            "stack-sm": "8px",
-            "stack-xs": "4px",
-            "gutter": "24px",
-            "stack-xl": "48px",
-            "margin-mobile": "16px",
-            "margin-desktop": "32px",
-            "container-max": "1280px"
-          },
-          "fontSize": {
-            "h1": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
-            "h2": ["32px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "600"}],
-            "h3": ["24px", {"lineHeight": "1.4", "letterSpacing": "0", "fontWeight": "600"}],
-            "body-lg": ["18px", {"lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400"}],
-            "body-md": ["16px", {"lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400"}],
-            "body-sm": ["14px", {"lineHeight": "1.5", "letterSpacing": "0", "fontWeight": "400"}],
-            "label-md": ["14px", {"lineHeight": "1", "letterSpacing": "0.02em", "fontWeight": "600"}],
-            "label-sm": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}]
-          }
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>PriceBloomBuddy Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "surface-variant": "#d3e4fe",
+          "on-surface-variant": "#3d4a3d",
+          "surface-bright": "#f8f9ff",
+          "secondary-fixed-dim": "#bcc7de",
+          "on-secondary": "#ffffff",
+          "on-tertiary-container": "#2623b8",
+          "on-tertiary-fixed-variant": "#2f2ebe",
+          "inverse-surface": "#213145",
+          "on-primary-container": "#004b1e",
+          "primary-fixed-dim": "#4ae176",
+          "surface-container": "#e5eeff",
+          "tertiary-fixed-dim": "#c0c1ff",
+          "surface-container-lowest": "#ffffff",
+          "secondary": "#545f73",
+          "on-background": "#0b1c30",
+          "on-primary-fixed-variant": "#005321",
+          "on-primary-fixed": "#002109",
+          "on-error": "#ffffff",
+          "on-error-container": "#93000a",
+          "surface-container-high": "#dce9ff",
+          "outline": "#6d7b6c",
+          "on-tertiary-fixed": "#07006c",
+          "error": "#ba1a1a",
+          "on-primary": "#ffffff",
+          "surface-container-highest": "#d3e4fe",
+          "primary": "#006e2f",
+          "primary-fixed": "#6bff8f",
+          "on-secondary-container": "#586377",
+          "tertiary-container": "#a1a3ff",
+          "error-container": "#ffdad6",
+          "secondary-container": "#d5e0f8",
+          "surface-tint": "#006e2f",
+          "tertiary-fixed": "#e1e0ff",
+          "inverse-primary": "#4ae176",
+          "primary-container": "#22c55e",
+          "on-surface": "#0b1c30",
+          "surface-container-low": "#eff4ff",
+          "tertiary": "#494bd6",
+          "surface": "#f8f9ff",
+          "on-tertiary": "#ffffff",
+          "secondary-fixed": "#d8e3fb",
+          "background": "#f8f9ff",
+          "outline-variant": "#bccbb9",
+          "surface-dim": "#cbdbf5",
+          "inverse-on-surface": "#eaf1ff",
+          "on-secondary-fixed": "#111c2d",
+          "on-secondary-fixed-variant": "#3c475a"
+        },
+        borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+        spacing: {
+          "stack-lg": "24px", "unit": "8px", "container-max": "1280px",
+          "margin-desktop": "32px", "stack-xs": "4px", "stack-sm": "8px",
+          "margin-mobile": "16px", "stack-xl": "48px", "gutter": "24px", "stack-md": "16px"
+        },
+        fontFamily: {
+          "h2": ["Inter"], "body-md": ["Inter"], "h3": ["Inter"], "body-lg": ["Inter"],
+          "h1": ["Inter"], "label-sm": ["Inter"], "body-sm": ["Inter"], "label-md": ["Inter"]
+        },
+        fontSize: {
+          "h2": ["32px", { lineHeight: "1.3", letterSpacing: "-0.01em", fontWeight: "600" }],
+          "body-md": ["16px", { lineHeight: "1.6", letterSpacing: "0", fontWeight: "400" }],
+          "h3": ["24px", { lineHeight: "1.4", letterSpacing: "0", fontWeight: "600" }],
+          "body-lg": ["18px", { lineHeight: "1.6", letterSpacing: "0", fontWeight: "400" }],
+          "h1": ["40px", { lineHeight: "1.2", letterSpacing: "-0.02em", fontWeight: "700" }],
+          "label-sm": ["12px", { lineHeight: "1", letterSpacing: "0.05em", fontWeight: "600" }],
+          "body-sm": ["14px", { lineHeight: "1.5", letterSpacing: "0", fontWeight: "400" }],
+          "label-md": ["14px", { lineHeight: "1", letterSpacing: "0.02em", fontWeight: "600" }]
         }
       }
     }
-  </script>
-  <style>
-    .material-symbols-outlined {
-      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-    }
-    body { font-family: 'Inter', sans-serif; }
-    .toast-notification {
-      animation: slideInRight 0.3s ease-out forwards;
-    }
-    @keyframes slideInRight {
-      from { opacity: 0; transform: translateX(30px); }
-      to { opacity: 1; transform: translateX(0); }
-    }
-    .toast-notification.hide {
-      animation: fadeOut 0.3s ease-out forwards;
-    }
-    @keyframes fadeOut {
-      to { opacity: 0; transform: translateX(30px); visibility: hidden; }
-    }
-  </style>
+  }
+</script>
+<style>
+  body { background-color: #f8f9ff; color: #0b1c30; }
+  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+  .page { display: none; }
+  .page.active { display: block; }
+  .nav-item { transition: all 0.2s; }
+  .nav-item.active-nav {
+    background-color: #22c55e;
+    color: #004b1e;
+    border-radius: 0.75rem;
+  }
+  .nav-item:not(.active-nav):hover { background-color: #dce9ff; border-radius: 0.75rem; }
+  .bloom-shadow { box-shadow: 0 10px 30px -10px rgba(30,41,59,0.08); }
+  /* Toast */
+  #toast {
+    position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%) translateY(20px);
+    background: #006e2f; color: #fff; padding: 10px 24px; border-radius: 999px;
+    font-size: 14px; font-weight: 600; opacity: 0; transition: all 0.3s; z-index: 999; pointer-events:none;
+  }
+  #toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+</style>
 </head>
-<body class="bg-background text-on-background">
+<body class="font-body-md text-on-background">
 
-<!-- Toast Container -->
-<div id="toast-container" class="fixed top-20 right-4 z-[100] flex flex-col gap-2 max-w-sm w-full"></div>
+<div id="toast"></div>
 
-<!-- TopNavBar -->
-<nav class="bg-surface/90 backdrop-blur-md sticky top-0 z-50 border-b border-outline-variant/30 shadow-sm">
-  <div class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop py-stack-sm max-w-container-max mx-auto">
-    <div class="flex items-center gap-gutter">
-      <button id="nav-home" class="font-h2 text-h2 font-bold text-primary tracking-tight hover:opacity-90 transition-opacity cursor-pointer">PriceBloomBuddy</button>
-      <div class="hidden md:flex items-center gap-stack-lg">
-        <button id="nav-dashboard" class="text-secondary font-medium hover:text-primary transition-colors cursor-pointer">Dashboard</button>
-        <button id="nav-trackers" class="text-secondary font-medium hover:text-primary transition-colors cursor-pointer">Trackers</button>
-        <button id="nav-pricing" class="text-secondary font-medium hover:text-primary transition-colors cursor-pointer">Pricing</button>
-      </div>
+<!-- SideNavBar -->
+<aside class="bg-surface-container-low h-screen w-64 fixed left-0 top-0 hidden lg:flex flex-col border-r border-outline-variant/50 shadow-md py-stack-lg space-y-stack-md z-40">
+  <div class="px-stack-md mb-stack-xl">
+    <h1 class="font-h3 text-h3 font-black text-primary">Bloom Dashboard</h1>
+    <p class="font-body-sm text-body-sm text-secondary">Tracking 2 items</p>
+  </div>
+  <nav class="flex-grow flex flex-col gap-stack-sm">
+    <a href="#" onclick="navigate('overview'); return false;" id="nav-overview"
+       class="nav-item active-nav flex items-center gap-stack-sm px-stack-md py-stack-sm mx-stack-sm">
+      <span class="material-symbols-outlined">dashboard</span>
+      <span class="font-label-md text-label-md">Overview</span>
+    </a>
+    <a href="#" onclick="navigate('history'); return false;" id="nav-history"
+       class="nav-item flex items-center gap-stack-sm text-secondary px-stack-md py-stack-sm mx-stack-sm">
+      <span class="material-symbols-outlined">history</span>
+      <span class="font-label-md text-label-md">History</span>
+    </a>
+    <a href="#" onclick="navigate('alerts'); return false;" id="nav-alerts"
+       class="nav-item flex items-center gap-stack-sm text-secondary px-stack-md py-stack-sm mx-stack-sm">
+      <span class="material-symbols-outlined">notifications_active</span>
+      <span class="font-label-md text-label-md">Alerts</span>
+    </a>
+    <a href="#" onclick="navigate('settings'); return false;" id="nav-settings"
+       class="nav-item flex items-center gap-stack-sm text-secondary px-stack-md py-stack-sm mx-stack-sm">
+      <span class="material-symbols-outlined">settings</span>
+      <span class="font-label-md text-label-md">Settings</span>
+    </a>
+  </nav>
+  <div class="mt-auto px-stack-md flex flex-col gap-stack-md">
+    <div class="bg-primary/5 rounded-xl p-stack-md border border-primary/10">
+      <p class="font-label-sm text-label-sm text-primary mb-2">PRO PLAN</p>
+      <button class="w-full bg-primary text-on-primary font-label-md text-label-md py-2 rounded-lg hover:opacity-90 transition-opacity" onclick="navigate('pricing')">Upgrade to Pro</button>
     </div>
-    <div class="flex items-center gap-stack-md">
-      <button id="add-link-btn" class="hidden md:flex items-center gap-stack-xs bg-primary text-on-primary px-stack-md py-stack-sm rounded-lg font-label-md hover:bg-primary/90 transition-all active:scale-95 cursor-pointer"><span class="material-symbols-outlined">add</span>Add Link</button>
-      <div class="flex gap-stack-sm text-secondary">
-        <button id="notifications-btn" class="flex items-center justify-center text-inherit hover:bg-surface-container-low transition-all rounded-full cursor-pointer">
-          <span class="material-symbols-outlined p-stack-sm">notifications</span>
+    <div class="flex flex-col gap-1">
+      <a href="#" class="flex items-center gap-stack-sm text-secondary font-label-md text-label-md px-stack-sm py-2 hover:text-on-surface">
+        <span class="material-symbols-outlined">help</span> Help Center
+      </a>
+      <a href="#" onclick="showToast('Logged out!'); return false;" class="flex items-center gap-stack-sm text-secondary font-label-md text-label-md px-stack-sm py-2 hover:text-on-surface">
+        <span class="material-symbols-outlined">logout</span> Logout
+      </a>
+    </div>
+  </div>
+</aside>
+
+<!-- Main Content -->
+<main class="lg:ml-64 min-h-screen">
+
+  <!-- TopNavBar -->
+  <header class="bg-surface/90 backdrop-blur-md sticky top-0 z-30 border-b border-outline-variant/30 shadow-sm">
+    <div class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop py-stack-sm max-w-container-max mx-auto">
+      <div class="flex items-center gap-stack-lg">
+        <div class="font-h2 text-h2 font-bold text-primary tracking-tight cursor-pointer" onclick="navigate('overview')">PriceBloomBuddy</div>
+        <nav class="hidden md:flex items-center gap-stack-md">
+          <a href="#" id="topnav-overview" onclick="navigate('overview'); return false;" class="text-primary font-bold border-b-2 border-primary pb-1 font-label-md text-label-md">Dashboard</a>
+          <a href="#" id="topnav-history" onclick="navigate('history'); return false;" class="text-secondary font-medium hover:text-primary transition-colors font-label-md text-label-md">Trackers</a>
+          <a href="#" id="topnav-pricing" onclick="navigate('pricing'); return false;" class="text-secondary font-medium hover:text-primary transition-colors font-label-md text-label-md">Pricing</a>
+        </nav>
+      </div>
+      <div class="flex items-center gap-stack-md">
+        <button onclick="navigate('add')" class="bg-primary text-on-primary px-stack-md py-2 rounded-lg font-label-md text-label-md flex items-center gap-2 hover:opacity-90 transition-all active:scale-95">
+          <span class="material-symbols-outlined" style="font-size:20px">add</span> Add Link
         </button>
-        <div class="relative">
-          <button id="account-menu-btn" class="flex items-center justify-center text-inherit hover:bg-surface-container-low transition-all rounded-full cursor-pointer">
-            <button id="auth-nav-btn" class="flex items-center justify-center gap-stack-xs bg-primary text-on-primary px-4 py-2 rounded-lg font-label-md hover:bg-primary/90 transition-all active:scale-95 cursor-pointer">
-              <span class="material-symbols-outlined text-[20px]">account_circle</span>
-              <span id="auth-nav-text">Sign In</span>
-            </button>
-          </button>
-          <div id="account-dropdown" class="hidden absolute right-0 mt-2 w-48 bg-surface rounded-xl shadow-lg border border-outline-variant/30 z-50 overflow-hidden">
-            <div id="dropdown-loggedout-view" class="py-2">
-              <button id="login-dropdown-btn" class="w-full text-left px-4 py-2 text-sm text-on-background hover:bg-surface-container-low transition-colors font-medium cursor-pointer">Sign In</button>
-              <button id="signup-dropdown-btn" class="w-full text-left px-4 py-2 text-sm text-on-background hover:bg-surface-container-low transition-colors font-medium cursor-pointer">Create Account</button>
-            </div>
-            <div id="dropdown-loggedin-view" class="hidden py-2">
-              <div class="px-4 py-2 text-sm font-semibold text-primary border-b border-outline-variant/20" id="dropdown-user-email">user@example.com</div>
-              <button id="myprofile-dropdown-btn" class="w-full text-left px-4 py-2 text-sm text-on-background hover:bg-surface-container-low transition-colors cursor-pointer">My Profile</button>
-              <button id="logout-dropdown-btn" class="w-full text-left px-4 py-2 text-sm text-error hover:bg-surface-container-low transition-colors cursor-pointer">Sign Out</button>
-            </div>
+        <div class="flex items-center gap-3 text-secondary">
+          <span class="material-symbols-outlined cursor-pointer hover:text-primary" onclick="navigate('alerts')">notifications</span>
+          <div class="w-10 h-10 rounded-full bg-surface-container-high border border-outline-variant/50 overflow-hidden flex items-center justify-center cursor-pointer" onclick="navigate('settings')">
+            <span class="material-symbols-outlined text-secondary">account_circle</span>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</nav>
+  </header>
 
-<main class="px-margin-mobile md:px-margin-desktop py-stack-lg max-w-container-max mx-auto">
-  <!-- Dashboard content will load here -->
-  <div id="dashboard-user-name"></div>
-  
-  <h1 class="font-h1 text-h1 text-on-background mb-stack-xl">Dashboard</h1>
-  
-  <!-- Your dashboard content here -->
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
-    <div class="bg-surface-container rounded-xl p-stack-lg border border-outline-variant/20">
-      <h3 class="font-h3 text-h3 text-on-background">Active Trackers</h3>
-      <p class="font-h2 text-h2 text-primary mt-stack-md">12</p>
+  <!-- ===== OVERVIEW PAGE ===== -->
+  <section id="page-overview" class="page active px-margin-mobile md:px-margin-desktop py-stack-xl max-w-container-max mx-auto">
+    <!-- Hero -->
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter mb-stack-xl">
+      <div class="md:col-span-8 bg-white p-stack-xl rounded-2xl border border-outline-variant/20 shadow-sm relative overflow-hidden">
+        <div class="relative z-10">
+          <h2 class="font-h2 text-h2 text-on-surface mb-stack-sm">Ready to Bloom?</h2>
+          <p class="text-secondary font-body-lg text-body-lg max-w-md">Your trackers are monitoring prices across 4 major platforms. We'll alert you the moment a "bloom" occurs.</p>
+          <div class="mt-stack-lg flex gap-stack-md">
+            <button onclick="navigate('add')" class="bg-primary text-on-primary px-stack-lg py-3 rounded-xl font-label-md text-label-md shadow-md hover:shadow-lg transition-all">Add New Tracker</button>
+          </div>
+        </div>
+        <div class="absolute -right-12 -bottom-12 w-64 h-64 bg-primary/5 rounded-full blur-3xl"></div>
+      </div>
+      <div class="md:col-span-4 bg-surface-container-low p-stack-xl rounded-2xl border border-outline-variant/30 flex flex-col justify-between">
+        <div>
+          <div class="flex justify-between items-center mb-stack-sm">
+            <span class="font-label-md text-label-md text-secondary">Link Limit</span>
+            <span class="font-label-md text-label-md text-primary font-bold">2/2 Links Used</span>
+          </div>
+          <div class="w-full h-3 bg-surface-container-highest rounded-full overflow-hidden mb-stack-md">
+            <div class="w-full h-full bg-primary rounded-full"></div>
+          </div>
+          <p class="font-body-sm text-body-sm text-secondary">You have reached your limit of 2 trackers on the Free Plan.</p>
+        </div>
+        <button onclick="navigate('pricing')" class="w-full mt-stack-md border-2 border-primary text-primary font-label-md text-label-md py-3 rounded-xl hover:bg-primary/5 transition-all">Upgrade for More</button>
+      </div>
     </div>
-    <div class="bg-surface-container rounded-xl p-stack-lg border border-outline-variant/20">
-      <h3 class="font-h3 text-h3 text-on-background">Total Savings</h3>
-      <p class="font-h2 text-h2 text-primary mt-stack-md">₹12,450</p>
+
+    <!-- Tracker Grid -->
+    <div class="mb-stack-lg flex justify-between items-end">
+      <div>
+        <h3 class="font-h3 text-h3 text-on-surface">Your Active Trackers</h3>
+        <p class="text-secondary font-body-sm text-body-sm" id="trackers-summary">Loading tracker data...</p>
+      </div>
+      <button onclick="navigate('history')" class="text-primary font-label-md text-label-md flex items-center gap-1 hover:underline">
+        View History <span class="material-symbols-outlined" style="font-size:16px">arrow_forward</span>
+      </button>
     </div>
-    <div class="bg-surface-container rounded-xl p-stack-lg border border-outline-variant/20">
-      <h3 class="font-h3 text-h3 text-on-background">This Month</h3>
-      <p class="font-h2 text-h2 text-primary mt-stack-md">₹2,340</p>
+
+    <div id="active-trackers-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+      <div class="bg-white rounded-2xl border border-outline-variant/20 shadow-sm p-stack-lg text-center">
+        <p class="font-label-md text-label-md text-on-surface">Loading active trackers...</p>
+        <p class="font-body-sm text-body-sm text-secondary mt-stack-sm">Fetching your product trackers from the server.</p>
+      </div>
     </div>
-  </div>
+  </section>
+
+  <!-- ===== HISTORY PAGE ===== -->
+  <section id="page-history" class="page px-margin-mobile md:px-margin-desktop py-stack-xl max-w-container-max mx-auto">
+    <h2 class="font-h2 text-h2 text-on-surface mb-stack-sm">Price History</h2>
+    <p class="text-secondary font-body-lg text-body-lg mb-stack-xl">Track how prices have moved over time for your watched products.</p>
+
+    <div id="history-list" class="space-y-gutter">
+      <div class="bg-white rounded-2xl border border-outline-variant/20 shadow-sm p-stack-lg text-center">
+        <p class="font-label-md text-label-md text-on-surface">Loading history...</p>
+        <p class="font-body-sm text-body-sm text-secondary mt-stack-sm">Fetching trackers from your account.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ALERTS PAGE ===== -->
+  <section id="page-alerts" class="page px-margin-mobile md:px-margin-desktop py-stack-xl max-w-container-max mx-auto">
+    <h2 class="font-h2 text-h2 text-on-surface mb-stack-sm">Alerts</h2>
+    <p class="text-secondary font-body-lg text-body-lg mb-stack-xl">Manage your price drop notifications and alert preferences.</p>
+
+    <!-- Alert Preferences -->
+    <div class="bg-white rounded-2xl border border-outline-variant/20 shadow-sm p-stack-xl mb-gutter">
+      <h3 class="font-h3 text-h3 text-on-surface mb-stack-lg">Notification Channels</h3>
+      <div class="space-y-stack-md">
+        <div class="flex items-center justify-between p-stack-md bg-surface-container-low rounded-xl">
+          <div class="flex items-center gap-stack-md">
+            <span class="material-symbols-outlined text-primary">mail</span>
+            <div>
+              <p class="font-label-md text-label-md text-on-surface">Email Alerts</p>
+              <p class="font-body-sm text-body-sm text-secondary">user@example.com</p>
+            </div>
+          </div>
+          <label class="relative inline-flex items-center cursor-pointer">
+            <input type="checkbox" class="sr-only peer" checked>
+            <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+          </label>
+        </div>
+        <div class="flex items-center justify-between p-stack-md bg-surface-container-low rounded-xl">
+          <div class="flex items-center gap-stack-md">
+            <span class="material-symbols-outlined text-secondary">sms</span>
+            <div>
+              <p class="font-label-md text-label-md text-on-surface">SMS Alerts</p>
+              <p class="font-body-sm text-body-sm text-secondary">Pro plan required</p>
+            </div>
+          </div>
+          <button onclick="navigate('pricing')" class="font-label-sm text-label-sm text-primary bg-primary/10 px-3 py-1 rounded-full hover:bg-primary/20 transition-colors">Upgrade</button>
+        </div>
+        <div class="flex items-center justify-between p-stack-md bg-surface-container-low rounded-xl">
+          <div class="flex items-center gap-stack-md">
+            <span class="material-symbols-outlined text-secondary">notifications</span>
+            <div>
+              <p class="font-label-md text-label-md text-on-surface">Push Notifications</p>
+              <p class="font-body-sm text-body-sm text-secondary">Browser notifications</p>
+            </div>
+          </div>
+          <label class="relative inline-flex items-center cursor-pointer">
+            <input type="checkbox" class="sr-only peer" checked>
+            <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Recent Alerts -->
+    <div class="bg-white rounded-2xl border border-outline-variant/20 shadow-sm p-stack-xl">
+      <h3 class="font-h3 text-h3 text-on-surface mb-stack-lg">Recent Alerts</h3>
+      <div class="space-y-stack-md">
+        <div class="flex items-start gap-stack-md p-stack-md bg-primary/5 rounded-xl border border-primary/10">
+          <span class="material-symbols-outlined text-primary mt-1">local_florist</span>
+          <div class="flex-1">
+            <p class="font-label-md text-label-md text-on-surface">Price drop detected!</p>
+            <p class="font-body-sm text-body-sm text-secondary">Sony WH-1000XM5 dropped from $360 to $348 on Amazon</p>
+            <p class="font-label-sm text-label-sm text-secondary mt-1">2 hours ago</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-stack-md p-stack-md bg-surface-container-low rounded-xl">
+          <span class="material-symbols-outlined text-secondary mt-1">trending_down</span>
+          <div class="flex-1">
+            <p class="font-label-md text-label-md text-on-surface">Price movement</p>
+            <p class="font-body-sm text-body-sm text-secondary">Nordic Chronograph Watch moved ₹500 closer to your target</p>
+            <p class="font-label-sm text-label-sm text-secondary mt-1">Yesterday</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-stack-md p-stack-md bg-surface-container-low rounded-xl">
+          <span class="material-symbols-outlined text-secondary mt-1">info</span>
+          <div class="flex-1">
+            <p class="font-label-md text-label-md text-on-surface">Tracker activated</p>
+            <p class="font-body-sm text-body-sm text-secondary">Your tracker for Sony WH-1000XM5 is now live</p>
+            <p class="font-label-sm text-label-sm text-secondary mt-1">3 days ago</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SETTINGS PAGE ===== -->
+  <section id="page-settings" class="page px-margin-mobile md:px-margin-desktop py-stack-xl max-w-container-max mx-auto">
+    <h2 class="font-h2 text-h2 text-on-surface mb-stack-sm">Settings</h2>
+    <p class="text-secondary font-body-lg text-body-lg mb-stack-xl">Manage your account preferences and profile.</p>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+      <!-- Profile Card -->
+      <div class="md:col-span-1">
+        <div class="bg-white rounded-2xl border border-outline-variant/20 shadow-sm p-stack-xl text-center">
+          <div class="w-24 h-24 rounded-full bg-surface-container-high border-4 border-primary/20 flex items-center justify-center mx-auto mb-stack-md">
+            <span class="material-symbols-outlined text-secondary" style="font-size:48px">account_circle</span>
+          </div>
+          <!-- Skeleton shown while loading -->
+          <div id="profile-card-skeleton" class="animate-pulse space-y-2 mb-stack-md">
+            <div class="h-6 bg-surface-container rounded-lg mx-auto w-3/4"></div>
+            <div class="h-4 bg-surface-container rounded-lg mx-auto w-2/3"></div>
+            <div class="h-4 bg-surface-container rounded-lg mx-auto w-1/2"></div>
+          </div>
+          <!-- Actual data -->
+          <div id="profile-card-data" class="hidden">
+            <h3 id="profile-card-name" class="font-h3 text-h3 text-on-surface mb-1">—</h3>
+            <p id="profile-card-email" class="font-body-sm text-body-sm text-secondary mb-1">—</p>
+            <p id="profile-card-mobile" class="font-body-sm text-body-sm text-secondary mb-stack-md">—</p>
+            <!-- Status badges -->
+            <div class="flex flex-wrap gap-2 justify-center mb-stack-md">
+              <span class="font-label-sm text-label-sm text-primary bg-primary/10 px-3 py-1 rounded-full">Free Plan</span>
+              <span id="profile-verified-badge" class="hidden font-label-sm text-label-sm text-primary bg-primary/10 px-3 py-1 rounded-full items-center gap-1">
+                <span class="material-symbols-outlined" style="font-size:12px">verified</span> Verified
+              </span>
+              <span id="profile-unverified-badge" class="hidden font-label-sm text-label-sm text-error bg-error/10 px-3 py-1 rounded-full">Unverified</span>
+            </div>
+            <!-- Member since -->
+            <p id="profile-created" class="font-label-sm text-label-sm text-secondary"></p>
+          </div>
+          <button onclick="navigate('pricing')" class="w-full mt-stack-lg bg-primary text-on-primary py-3 rounded-xl font-label-md text-label-md hover:opacity-90 transition-opacity">Upgrade to Pro</button>
+        </div>
+      </div>
+
+      <!-- Settings Form -->
+      <div class="md:col-span-2 space-y-gutter">
+
+        <!-- Profile Settings -->
+        <div class="bg-white rounded-2xl border border-outline-variant/20 shadow-sm p-stack-xl">
+          <div class="flex items-center justify-between mb-stack-lg">
+            <h3 class="font-h3 text-h3 text-on-surface">Profile Settings</h3>
+            <div id="settings-loading-spinner" class="hidden">
+              <span class="material-symbols-outlined text-primary animate-spin" style="font-size:20px">autorenew</span>
+            </div>
+          </div>
+          <div class="space-y-stack-md">
+            <div>
+              <label class="font-label-md text-label-md text-secondary block mb-stack-xs">Full Name</label>
+              <input id="settings-name" class="w-full border border-outline-variant/50 rounded-xl px-stack-md py-3 font-body-md focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all" type="text" placeholder="Loading…"/>
+            </div>
+            <div>
+              <label class="font-label-md text-label-md text-secondary block mb-stack-xs">Email Address</label>
+              <div class="relative">
+                <input id="settings-email" class="w-full border border-outline-variant/30 bg-surface-container-low rounded-xl px-stack-md py-3 font-body-md outline-none text-secondary cursor-not-allowed" type="email" placeholder="Loading…" readonly/>
+                <span class="absolute right-3 top-1/2 -translate-y-1/2 font-label-sm text-label-sm text-secondary bg-surface-container px-2 py-0.5 rounded-full">Read-only</span>
+              </div>
+            </div>
+            <div>
+              <label class="font-label-md text-label-md text-secondary block mb-stack-xs">Mobile Number</label>
+              <input id="settings-mobile" class="w-full border border-outline-variant/50 rounded-xl px-stack-md py-3 font-body-md focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all" type="tel" placeholder="Loading…"/>
+            </div>
+
+            <!-- Notification Preferences -->
+            <div class="pt-stack-sm border-t border-outline-variant/10">
+              <p class="font-label-md text-label-md text-on-surface mb-stack-md">Notification Preferences</p>
+              <div class="space-y-stack-sm">
+                <label class="flex items-center justify-between p-stack-sm bg-surface-container-low rounded-xl cursor-pointer hover:bg-surface-container transition-colors">
+                  <div class="flex items-center gap-stack-sm">
+                    <span class="material-symbols-outlined text-primary" style="font-size:20px">mail</span>
+                    <span class="font-body-sm text-body-sm text-on-surface">Email Notifications</span>
+                  </div>
+                  <div class="relative inline-flex items-center">
+                    <input id="settings-notify-email" type="checkbox" class="sr-only peer">
+                    <div class="w-11 h-6 bg-gray-200 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+                  </div>
+                </label>
+                <label class="flex items-center justify-between p-stack-sm bg-surface-container-low rounded-xl cursor-pointer hover:bg-surface-container transition-colors">
+                  <div class="flex items-center gap-stack-sm">
+                    <span class="material-symbols-outlined text-secondary" style="font-size:20px">chat</span>
+                    <div>
+                      <span class="font-body-sm text-body-sm text-on-surface">WhatsApp Notifications</span>
+                      <span class="ml-2 font-label-sm text-label-sm text-primary bg-primary/10 px-2 py-0.5 rounded-full">Pro</span>
+                    </div>
+                  </div>
+                  <div class="relative inline-flex items-center">
+                    <input id="settings-notify-whatsapp" type="checkbox" class="sr-only peer">
+                    <div class="w-11 h-6 bg-gray-200 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+                  </div>
+                </label>
+                <label class="flex items-center justify-between p-stack-sm bg-surface-container-low rounded-xl cursor-pointer hover:bg-surface-container transition-colors">
+                  <div class="flex items-center gap-stack-sm">
+                    <span class="material-symbols-outlined text-secondary" style="font-size:20px">sms</span>
+                    <div>
+                      <span class="font-body-sm text-body-sm text-on-surface">SMS Notifications</span>
+                      <span class="ml-2 font-label-sm text-label-sm text-primary bg-primary/10 px-2 py-0.5 rounded-full">Pro</span>
+                    </div>
+                  </div>
+                  <div class="relative inline-flex items-center">
+                    <input id="settings-notify-sms" type="checkbox" class="sr-only peer">
+                    <div class="w-11 h-6 bg-gray-200 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+                  </div>
+                </label>
+              </div>
+            </div>
+
+            <button id="settings-save-btn" onclick="saveUserProfile()" class="bg-primary text-on-primary px-stack-lg py-3 rounded-xl font-label-md text-label-md hover:opacity-90 transition-opacity flex items-center gap-2">
+              <span class="material-symbols-outlined" style="font-size:18px">save</span>
+              Save Changes
+            </button>
+          </div>
+        </div>
+
+        <!-- Account Details Info Card -->
+        <div class="bg-white rounded-2xl border border-outline-variant/20 shadow-sm p-stack-xl">
+          <h3 class="font-h3 text-h3 text-on-surface mb-stack-lg">Account Details</h3>
+          <div id="account-details-skeleton" class="animate-pulse space-y-3">
+            <div class="h-10 bg-surface-container rounded-xl"></div>
+            <div class="h-10 bg-surface-container rounded-xl"></div>
+            <div class="h-10 bg-surface-container rounded-xl"></div>
+          </div>
+          <div id="account-details-data" class="hidden space-y-stack-sm">
+            <div class="flex justify-between items-center p-stack-md bg-surface-container-low rounded-xl">
+              <div class="flex items-center gap-stack-md">
+                <span class="material-symbols-outlined text-secondary">badge</span>
+                <span class="font-label-md text-label-md text-on-surface">Account ID</span>
+              </div>
+              <span id="detail-id" class="font-body-sm text-body-sm text-secondary font-mono truncate max-w-[140px]">—</span>
+            </div>
+            <div class="flex justify-between items-center p-stack-md bg-surface-container-low rounded-xl">
+              <div class="flex items-center gap-stack-md">
+                <span class="material-symbols-outlined text-secondary">calendar_today</span>
+                <span class="font-label-md text-label-md text-on-surface">Member Since</span>
+              </div>
+              <span id="detail-created" class="font-body-sm text-body-sm text-secondary">—</span>
+            </div>
+            <div class="flex justify-between items-center p-stack-md bg-surface-container-low rounded-xl">
+              <div class="flex items-center gap-stack-md">
+                <span class="material-symbols-outlined text-secondary">update</span>
+                <span class="font-label-md text-label-md text-on-surface">Last Updated</span>
+              </div>
+              <span id="detail-updated" class="font-body-sm text-body-sm text-secondary">—</span>
+            </div>
+            <div class="flex justify-between items-center p-stack-md bg-surface-container-low rounded-xl">
+              <div class="flex items-center gap-stack-md">
+                <span class="material-symbols-outlined text-secondary">verified_user</span>
+                <span class="font-label-md text-label-md text-on-surface">Email Status</span>
+              </div>
+              <span id="detail-verified" class="font-label-sm text-label-sm px-3 py-1 rounded-full">—</span>
+            </div>
+            <div class="flex justify-between items-center p-stack-md bg-surface-container-low rounded-xl">
+              <div class="flex items-center gap-stack-md">
+                <span class="material-symbols-outlined text-secondary">toggle_on</span>
+                <span class="font-label-md text-label-md text-on-surface">Account Status</span>
+              </div>
+              <span id="detail-active" class="font-label-sm text-label-sm px-3 py-1 rounded-full">—</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Account Actions -->
+        <div class="bg-white rounded-2xl border border-outline-variant/20 shadow-sm p-stack-xl">
+          <h3 class="font-h3 text-h3 text-on-surface mb-stack-lg">Account Actions</h3>
+          <div class="space-y-stack-sm">
+            <button onclick="showToast('Password reset email sent!')" class="w-full text-left flex items-center justify-between p-stack-md bg-surface-container-low rounded-xl hover:bg-surface-container transition-colors">
+              <div class="flex items-center gap-stack-md">
+                <span class="material-symbols-outlined text-secondary">lock</span>
+                <span class="font-label-md text-label-md text-on-surface">Change Password</span>
+              </div>
+              <span class="material-symbols-outlined text-secondary">chevron_right</span>
+            </button>
+            <button onclick="handleLogout()" class="w-full text-left flex items-center justify-between p-stack-md bg-surface-container-low rounded-xl hover:bg-surface-container transition-colors">
+              <div class="flex items-center gap-stack-md">
+                <span class="material-symbols-outlined text-secondary">logout</span>
+                <span class="font-label-md text-label-md text-on-surface">Logout</span>
+              </div>
+              <span class="material-symbols-outlined text-secondary">chevron_right</span>
+            </button>
+            <button onclick="showToast('Please contact support to delete your account.')" class="w-full text-left flex items-center justify-between p-stack-md bg-error/5 rounded-xl hover:bg-error/10 transition-colors">
+              <div class="flex items-center gap-stack-md">
+                <span class="material-symbols-outlined text-error">delete_forever</span>
+                <span class="font-label-md text-label-md text-error">Delete Account</span>
+              </div>
+              <span class="material-symbols-outlined text-error">chevron_right</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ADD TRACKER PAGE ===== -->
+  <section id="page-add" class="page px-margin-mobile md:px-margin-desktop py-stack-xl max-w-container-max mx-auto">
+    <div class="w-full max-w-[640px] mx-auto space-y-stack-xl">
+      <div class="text-center space-y-stack-sm">
+        <h1 class="font-h1 text-h1 text-on-background">Grow Your Savings</h1>
+        <p class="font-body-lg text-body-lg text-secondary max-w-md mx-auto">Paste a product URL and set your target Bloom Price. We'll notify you the moment it drops.</p>
+      </div>
+
+      <div class="bg-surface-container-lowest border border-outline-variant/30 rounded-[16px] bloom-shadow p-stack-xl space-y-stack-lg relative overflow-hidden">
+        <div class="absolute top-0 left-0 right-0 h-1 bg-surface-container">
+          <div class="h-full bg-primary w-1/3 rounded-r-full"></div>
+        </div>
+        <div class="flex items-center justify-between bg-primary-container/10 px-stack-md py-stack-sm rounded-xl border border-primary/10">
+          <div class="flex items-center gap-stack-sm">
+            <span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1;">timer</span>
+            <span class="font-label-md text-on-primary-container">Free Tier: 7-Day Tracking Validity</span>
+          </div>
+          <span class="font-label-sm text-primary underline cursor-pointer" onclick="navigate('pricing')">Extend with Pro</span>
+        </div>
+
+        <div class="space-y-stack-lg">
+          <!-- URL Input -->
+          <div class="space-y-stack-xs">
+            <label class="font-label-md text-on-surface-variant flex items-center justify-between">
+              <span>Product URL</span>
+              <span id="url-status" class="text-secondary flex items-center gap-1 font-medium font-label-sm">
+                <span class="material-symbols-outlined text-[16px]">link</span> Paste a URL below
+              </span>
+            </label>
+            <div class="relative group">
+              <input id="tracker-url" class="w-full bg-background border border-outline-variant/50 rounded-xl px-stack-md py-4 pr-16 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all font-body-md" placeholder="https://www.amazon.com/product/..." type="text" oninput="detectPlatform(this.value)"/>
+              <div class="absolute right-4 top-1/2 -translate-y-1/2 flex items-center">
+                <div id="platform-badge" class="bg-white p-1 rounded-lg shadow-sm border border-outline-variant/20 hidden">
+                  <span id="platform-icon" class="material-symbols-outlined text-secondary" style="font-size:20px">store</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Price Config -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+            <div class="space-y-stack-xs">
+              <label class="font-label-md text-on-surface-variant">Bloom Price (Target)</label>
+              <div class="relative">
+                <span class="absolute left-4 top-1/2 -translate-y-1/2 text-secondary" id="currency-sym">₹</span>
+                <input id="bloom-price" class="w-full bg-background border border-primary/40 rounded-xl pl-8 pr-stack-md py-4 focus:ring-2 focus:ring-primary/20 outline-none transition-all font-body-md font-bold text-primary" type="number" placeholder="0"/>
+              </div>
+              <p class="font-label-sm text-secondary" id="savings-label">Enter a target price</p>
+            </div>
+            <div class="space-y-stack-xs">
+              <label class="font-label-md text-on-surface-variant">Alert Preference</label>
+              <div class="flex items-center gap-2 h-[58px] bg-background border border-outline-variant/50 rounded-xl px-stack-md">
+                <span class="material-symbols-outlined text-secondary">mail</span>
+                <span class="font-body-sm">Email + Push Notification</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- CTA -->
+          <button onclick="plantTracker()" class="w-full bg-primary-container text-on-primary-container py-stack-lg rounded-xl font-h3 hover:opacity-95 transition-all shadow-lg flex items-center justify-center gap-stack-md">
+            <span class="material-symbols-outlined">local_florist</span>
+            Plant This Tracker
+          </button>
+        </div>
+      </div>
+
+      <div class="flex items-center justify-center gap-stack-xl text-secondary">
+        <div class="flex items-center gap-stack-xs">
+          <span class="material-symbols-outlined text-[20px]">verified_user</span>
+          <span class="font-label-sm uppercase tracking-wider">Secure Tracking</span>
+        </div>
+        <div class="flex items-center gap-stack-xs">
+          <span class="material-symbols-outlined text-[20px]">notifications_active</span>
+          <span class="font-label-sm uppercase tracking-wider">Instant Alerts</span>
+        </div>
+        <div class="flex items-center gap-stack-xs">
+          <span class="material-symbols-outlined text-[20px]">trending_down</span>
+          <span class="font-label-sm uppercase tracking-wider">Price History</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PRICING PAGE ===== -->
+  <section id="page-pricing" class="page px-margin-mobile md:px-margin-desktop py-stack-xl max-w-container-max mx-auto">
+    <div class="text-center mb-stack-xl">
+      <h2 class="font-h2 text-h2 text-on-surface mb-stack-sm">Choose Your Plan</h2>
+      <p class="text-secondary font-body-lg text-body-lg">Start free, upgrade when you're ready to bloom more.</p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter max-w-4xl mx-auto">
+      <!-- Free -->
+      <div class="bg-white rounded-2xl border border-outline-variant/20 shadow-sm p-stack-xl">
+        <p class="font-label-sm text-label-sm text-secondary uppercase tracking-wider mb-stack-sm">Free</p>
+        <p class="font-h1 text-h1 text-on-surface mb-1">$0</p>
+        <p class="font-body-sm text-body-sm text-secondary mb-stack-lg">Forever free</p>
+        <ul class="space-y-stack-sm mb-stack-xl">
+          <li class="flex items-center gap-2 font-body-sm text-body-sm"><span class="material-symbols-outlined text-primary text-[18px]">check_circle</span> 2 price trackers</li>
+          <li class="flex items-center gap-2 font-body-sm text-body-sm"><span class="material-symbols-outlined text-primary text-[18px]">check_circle</span> Email alerts</li>
+          <li class="flex items-center gap-2 font-body-sm text-body-sm"><span class="material-symbols-outlined text-primary text-[18px]">check_circle</span> 7-day tracking</li>
+          <li class="flex items-center gap-2 font-body-sm text-body-sm text-secondary"><span class="material-symbols-outlined text-outline text-[18px]">cancel</span> SMS alerts</li>
+          <li class="flex items-center gap-2 font-body-sm text-body-sm text-secondary"><span class="material-symbols-outlined text-outline text-[18px]">cancel</span> Price history</li>
+        </ul>
+        <button onclick="showToast('You are on the Free plan!')" class="w-full border-2 border-outline-variant text-secondary py-3 rounded-xl font-label-md hover:bg-surface-container transition-colors">Current Plan</button>
+      </div>
+      <!-- Pro -->
+      <div class="bg-primary rounded-2xl shadow-lg p-stack-xl relative overflow-hidden">
+        <div class="absolute -right-8 -top-8 w-32 h-32 bg-white/10 rounded-full"></div>
+        <p class="font-label-sm text-label-sm text-primary-fixed-dim uppercase tracking-wider mb-stack-sm">Pro</p>
+        <p class="font-h1 text-h1 text-on-primary mb-1">$9</p>
+        <p class="font-body-sm text-body-sm text-primary-fixed-dim mb-stack-lg">per month</p>
+        <ul class="space-y-stack-sm mb-stack-xl">
+          <li class="flex items-center gap-2 font-body-sm text-body-sm text-on-primary"><span class="material-symbols-outlined text-primary-fixed text-[18px]">check_circle</span> 20 price trackers</li>
+          <li class="flex items-center gap-2 font-body-sm text-body-sm text-on-primary"><span class="material-symbols-outlined text-primary-fixed text-[18px]">check_circle</span> Email + SMS alerts</li>
+          <li class="flex items-center gap-2 font-body-sm text-body-sm text-on-primary"><span class="material-symbols-outlined text-primary-fixed text-[18px]">check_circle</span> 90-day tracking</li>
+          <li class="flex items-center gap-2 font-body-sm text-body-sm text-on-primary"><span class="material-symbols-outlined text-primary-fixed text-[18px]">check_circle</span> Full price history</li>
+          <li class="flex items-center gap-2 font-body-sm text-body-sm text-on-primary"><span class="material-symbols-outlined text-primary-fixed text-[18px]">check_circle</span> Priority support</li>
+        </ul>
+        <button onclick="showToast('Redirecting to checkout... 🌸')" class="w-full bg-on-primary text-primary py-3 rounded-xl font-label-md hover:opacity-90 transition-opacity">Upgrade to Pro</button>
+      </div>
+      <!-- Business -->
+      <div class="bg-white rounded-2xl border border-outline-variant/20 shadow-sm p-stack-xl">
+        <p class="font-label-sm text-label-sm text-secondary uppercase tracking-wider mb-stack-sm">Business</p>
+        <p class="font-h1 text-h1 text-on-surface mb-1">$29</p>
+        <p class="font-body-sm text-body-sm text-secondary mb-stack-lg">per month</p>
+        <ul class="space-y-stack-sm mb-stack-xl">
+          <li class="flex items-center gap-2 font-body-sm text-body-sm"><span class="material-symbols-outlined text-primary text-[18px]">check_circle</span> Unlimited trackers</li>
+          <li class="flex items-center gap-2 font-body-sm text-body-sm"><span class="material-symbols-outlined text-primary text-[18px]">check_circle</span> All Pro features</li>
+          <li class="flex items-center gap-2 font-body-sm text-body-sm"><span class="material-symbols-outlined text-primary text-[18px]">check_circle</span> API access</li>
+          <li class="flex items-center gap-2 font-body-sm text-body-sm"><span class="material-symbols-outlined text-primary text-[18px]">check_circle</span> Team sharing</li>
+          <li class="flex items-center gap-2 font-body-sm text-body-sm"><span class="material-symbols-outlined text-primary text-[18px]">check_circle</span> Dedicated support</li>
+        </ul>
+        <button onclick="showToast('Contact us at hello@pricebloombuddy.com')" class="w-full bg-primary text-on-primary py-3 rounded-xl font-label-md hover:opacity-90 transition-opacity">Contact Sales</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="w-full py-stack-xl mt-stack-xl bg-surface-container-highest border-t border-outline-variant/20">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto text-center md:text-left">
+      <div class="flex flex-col gap-stack-sm">
+        <div class="font-h3 text-h3 font-bold text-primary">PriceBloomBuddy</div>
+        <p class="font-body-sm text-body-sm text-secondary">© 2024 PriceBloomBuddy. Grow your savings.</p>
+      </div>
+      <div class="flex flex-col gap-2">
+        <h5 class="font-label-md text-label-md text-on-surface">Resources</h5>
+        <a href="#" class="font-label-sm text-label-sm text-secondary hover:text-on-surface">Blog</a>
+        <a href="#" class="font-label-sm text-label-sm text-secondary hover:text-on-surface">Help Center</a>
+        <a href="#" class="font-label-sm text-label-sm text-secondary hover:text-on-surface">Contact Us</a>
+      </div>
+      <div class="flex flex-col gap-2">
+        <h5 class="font-label-md text-label-md text-on-surface">Legal</h5>
+        <a href="#" class="font-label-sm text-label-sm text-secondary hover:text-on-surface">Privacy Policy</a>
+        <a href="#" class="font-label-sm text-label-sm text-secondary hover:text-on-surface">Terms of Service</a>
+      </div>
+    </div>
+  </footer>
 </main>
 
-<!-- Footer -->
-<footer class="bg-surface-container-highest w-full py-stack-xl mt-stack-xl border-t border-outline-variant/20">
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto text-center md:text-left">
-    <div><button id="footer-home" class="font-h3 text-h3 font-bold text-primary block mb-stack-sm hover:opacity-90 transition-opacity cursor-pointer">PriceBloomBuddy</button><p class="font-body-sm text-secondary">The world's most intelligent price tracker for the modern consumer.</p></div>
-    <div class="flex flex-col gap-stack-sm"><h5 class="font-label-md text-on-surface">Quick Links</h5><button id="footer-dashboard" class="font-body-sm text-secondary text-left cursor-pointer hover:text-primary">Dashboard</button><button id="footer-trackers" class="font-body-sm text-secondary text-left cursor-pointer hover:text-primary">Trackers</button><button id="footer-pricing" class="font-body-sm text-secondary text-left cursor-pointer hover:text-primary">Pricing</button></div>
-    <div class="flex flex-col justify-between"><div class="flex justify-center md:justify-end gap-stack-md"><span class="material-symbols-outlined text-secondary cursor-pointer hover:text-primary">language</span><span class="material-symbols-outlined text-secondary cursor-pointer hover:text-primary">rss_feed</span><span class="material-symbols-outlined text-secondary cursor-pointer hover:text-primary">share</span></div><p class="font-label-sm text-secondary mt-stack-md">© 2024 PriceBloomBuddy. Grow your savings.</p></div>
+<!-- Bottom Nav (Mobile) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full bg-surface/90 backdrop-blur-md border-t border-outline-variant/30 flex justify-around items-center py-stack-sm z-50 px-margin-mobile">
+  <a href="#" onclick="navigate('overview'); return false;" class="flex flex-col items-center gap-1 text-primary">
+    <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">dashboard</span>
+    <span class="font-label-sm text-label-sm">Home</span>
+  </a>
+  <a href="#" onclick="navigate('history'); return false;" class="flex flex-col items-center gap-1 text-secondary">
+    <span class="material-symbols-outlined">history</span>
+    <span class="font-label-sm text-label-sm">History</span>
+  </a>
+  <div class="relative -top-6">
+    <button onclick="navigate('add')" class="bg-primary text-on-primary w-14 h-14 rounded-full shadow-lg flex items-center justify-center active:scale-95 transition-transform">
+      <span class="material-symbols-outlined" style="font-size:32px">add</span>
+    </button>
   </div>
-</footer>
+  <a href="#" onclick="navigate('alerts'); return false;" class="flex flex-col items-center gap-1 text-secondary">
+    <span class="material-symbols-outlined">notifications</span>
+    <span class="font-label-sm text-label-sm">Alerts</span>
+  </a>
+  <a href="#" onclick="navigate('settings'); return false;" class="flex flex-col items-center gap-1 text-secondary">
+    <span class="material-symbols-outlined">settings</span>
+    <span class="font-label-sm text-label-sm">Settings</span>
+  </a>
+</nav>
 
-<script src="script.js"></script>
+<script src="config.js"></script>
 <script>
-  // Protect this page - user must be logged in
-  document.addEventListener('DOMContentLoaded', () => {
-    if (!currentUser) {
-      showToast('Please sign in to access the dashboard', 'error');
-      setTimeout(() => window.location.href = 'createaccout.html', 1000);
+  // ─── Session ──────────────────────────────────────────────────────────────
+  function getSession() {
+    try { return JSON.parse(localStorage.getItem('pricebloom_user')) || null; }
+    catch { return null; }
+  }
+
+  // ─── Navigation ───────────────────────────────────────────────────────────
+  const pages  = ['overview','history','alerts','settings','add','pricing'];
+  const navIds = ['overview','history','alerts','settings'];
+
+  function navigate(page) {
+    pages.forEach(p => {
+      const el = document.getElementById('page-' + p);
+      if (el) el.classList.remove('active');
+    });
+    const target = document.getElementById('page-' + page);
+    if (target) { target.classList.add('active'); window.scrollTo(0, 0); }
+
+    navIds.forEach(id => {
+      const el = document.getElementById('nav-' + id);
+      if (!el) return;
+      el.classList.remove('active-nav','text-on-primary-container');
+      el.classList.add('text-secondary');
+    });
+    const activeNav = document.getElementById('nav-' + page);
+    if (activeNav) { activeNav.classList.add('active-nav'); activeNav.classList.remove('text-secondary'); }
+
+    const topNavMap = { overview:'topnav-overview', history:'topnav-history', pricing:'topnav-pricing' };
+    ['topnav-overview','topnav-history','topnav-pricing'].forEach(id => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.classList.remove('text-primary','font-bold','border-b-2','border-primary','pb-1');
+      el.classList.add('text-secondary','font-medium');
+    });
+    const topId = topNavMap[page];
+    if (topId) {
+      const el = document.getElementById(topId);
+      if (el) { el.classList.add('text-primary','font-bold','border-b-2','border-primary','pb-1'); el.classList.remove('text-secondary','font-medium'); }
     }
-  });
+
+    if (window.history && window.history.replaceState) {
+      window.history.replaceState(null, '', '#' + page);
+    } else {
+      window.location.hash = page;
+    }
+
+    // Load profile when settings tab is opened
+    if (page === 'settings') loadUserProfile();
+  }
+
+  // ─── Toast ────────────────────────────────────────────────────────────────
+  function showToast(msg, type) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    // Optional colour for error
+    t.style.background = type === 'error' ? '#ba1a1a' : '#006e2f';
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2800);
+  }
+
+  // ─── User Profile API ─────────────────────────────────────────────────────
+  async function loadUserProfile() {
+    const session = getSession();
+    if (!session || !session.id) {
+      showToast('Session expired. Please log in again.', 'error');
+      return;
+    }
+    const userId = session.id;
+
+    // Show skeletons
+    document.getElementById('profile-card-skeleton').classList.remove('hidden');
+    document.getElementById('profile-card-data').classList.add('hidden');
+    document.getElementById('account-details-skeleton').classList.remove('hidden');
+    document.getElementById('account-details-data').classList.add('hidden');
+
+    try {
+      console.log('[loadUserProfile] fetching user profile for id:', userId);
+      const res = await fetch(`${API_BASE}/api/userprofile/${userId}`, {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' }
+      });
+      const json = await res.json();
+      console.log('[loadUserProfile] response status:', res.status, res.statusText, json);
+      if (!res.ok) {
+        throw new Error(json.message || json.error || 'Failed to fetch profile');
+      }
+
+      const u = json.data || json;
+      if (!u || Object.keys(u).length === 0) {
+        throw new Error('Profile response was empty');
+      }
+      populateSettingsForm(u);
+    } catch (err) {
+      showToast('Could not load profile: ' + err.message, 'error');
+    }
+  }
+
+  function populateSettingsForm(u) {
+    const name = u.name || u.Name || '';
+    const email = u.email || u.Email || '';
+    const mobile = u.mobileNumber || u.MobileNumber || '';
+    const notifyEmail = u.notifyEmail ?? u.NotifyEmail ?? false;
+    const notifyWhatsapp = u.notifyWhatsapp ?? u.NotifyWhatsapp ?? false;
+    const notifySms = u.notifySms ?? u.NotifySms ?? false;
+    const emailVerified = u.emailVerified ?? u.EmailVerified ?? false;
+    const isActive = u.isActive ?? u.IsActive ?? false;
+    const createdAt = u.createdAt || u.CreatedAt || '';
+    const updatedAt = u.updatedAt || u.UpdatedAt || '';
+    const idValue = u.id || u.Id || u._id || '—';
+
+    // Form fields
+    document.getElementById('settings-name').value   = name;
+    document.getElementById('settings-email').value  = email;
+    document.getElementById('settings-mobile').value = mobile;
+    document.getElementById('settings-notify-email').checked     = !!notifyEmail;
+    document.getElementById('settings-notify-whatsapp').checked  = !!notifyWhatsapp;
+    document.getElementById('settings-notify-sms').checked       = !!notifySms;
+
+    // Disable Pro-only features
+    const whatsappInput = document.getElementById('settings-notify-whatsapp');
+    const smsInput = document.getElementById('settings-notify-sms');
+    const whatsappLabel = whatsappInput?.closest('label');
+    const smsLabel = smsInput?.closest('label');
+    
+    if (whatsappInput) {
+      whatsappInput.disabled = true;
+      if (whatsappLabel) {
+        whatsappLabel.classList.add('opacity-60', 'cursor-not-allowed');
+        whatsappLabel.classList.remove('hover:bg-surface-container');
+      }
+    }
+    if (smsInput) {
+      smsInput.disabled = true;
+      if (smsLabel) {
+        smsLabel.classList.add('opacity-60', 'cursor-not-allowed');
+        smsLabel.classList.remove('hover:bg-surface-container');
+      }
+    }
+
+    // Profile card
+    document.getElementById('profile-card-name').textContent   = name || '—';
+    document.getElementById('profile-card-email').textContent  = email || '—';
+    document.getElementById('profile-card-mobile').textContent = mobile ? '📱 ' + mobile : '';
+
+    // Verified badge
+    const vBadge = document.getElementById('profile-verified-badge');
+    const uBadge = document.getElementById('profile-unverified-badge');
+    if (emailVerified) {
+      vBadge.classList.remove('hidden'); vBadge.classList.add('flex');
+      uBadge.classList.add('hidden');
+    } else {
+      uBadge.classList.remove('hidden');
+      vBadge.classList.add('hidden');
+    }
+
+    // Member since
+    const createdStr = createdAt ? new Date(createdAt).toLocaleDateString('en-IN', { year:'numeric', month:'short', day:'numeric' }) : '—';
+    document.getElementById('profile-created').textContent = 'Member since ' + createdStr;
+
+    // Account details section
+    document.getElementById('detail-id').textContent      = idValue;
+    document.getElementById('detail-created').textContent = createdStr;
+    document.getElementById('detail-updated').textContent = updatedAt
+      ? new Date(updatedAt).toLocaleDateString('en-IN', { year:'numeric', month:'short', day:'numeric', hour:'2-digit', minute:'2-digit' })
+      : '—';
+
+    const verifiedEl = document.getElementById('detail-verified');
+    verifiedEl.textContent = emailVerified ? '✓ Verified' : '✗ Not Verified';
+    verifiedEl.className = emailVerified
+      ? 'font-label-sm text-label-sm text-primary bg-primary/10 px-3 py-1 rounded-full'
+      : 'font-label-sm text-label-sm text-error bg-error/10 px-3 py-1 rounded-full';
+
+    const activeEl = document.getElementById('detail-active');
+    activeEl.textContent = isActive ? 'Active' : 'Inactive';
+    activeEl.className = isActive
+      ? 'font-label-sm text-label-sm text-primary bg-primary/10 px-3 py-1 rounded-full'
+      : 'font-label-sm text-label-sm text-error bg-error/10 px-3 py-1 rounded-full';
+
+    // Hide skeletons, show data
+    document.getElementById('profile-card-skeleton').classList.add('hidden');
+    document.getElementById('profile-card-data').classList.remove('hidden');
+    document.getElementById('account-details-skeleton').classList.add('hidden');
+    document.getElementById('account-details-data').classList.remove('hidden');
+  }
+
+  async function saveUserProfile() {
+    const session = getSession();
+    if (!session || !session.id) { showToast('Session expired. Please log in again.', 'error'); return; }
+
+    const btn     = document.getElementById('settings-save-btn');
+    const spinner = document.getElementById('settings-loading-spinner');
+    btn.disabled  = true;
+    btn.innerHTML = '<span class="material-symbols-outlined animate-spin" style="font-size:18px">autorenew</span> Saving…';
+    spinner.classList.remove('hidden');
+
+    const body = {
+      Name:            document.getElementById('settings-name').value.trim(),
+      MobileNumber:    document.getElementById('settings-mobile').value.trim(),
+      NotifyEmail:     document.getElementById('settings-notify-email').checked,
+      NotifyWhatsapp:  false,  // Pro-only: always false for Free plan
+      NotifySms:       false,  // Pro-only: always false for Free plan
+    };
+
+    if (!body.Name) {
+      showToast('Name cannot be empty.', 'error');
+      resetSaveBtn(btn, spinner); 
+      return;
+    }
+
+    try {
+      console.log('[saveUserProfile] Saving profile with body:', body);
+      console.log('[saveUserProfile] Using userId in URL path:', session.id);
+      
+      const res = await fetch(`${API_BASE}/api/userprofile/${session.id}`, {
+        method: 'PUT',
+        headers: { 
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(body)
+      });
+      const json = await res.json();
+      
+      console.log('[saveUserProfile] Response status:', res.status, json);
+      
+      if (!res.ok) {
+        throw new Error(json.message || json.error || 'Update failed');
+      }
+
+      // Update localStorage name so sidebar greets correctly
+      const updated = { ...session, name: body.Name };
+      localStorage.setItem('pricebloom_user', JSON.stringify(updated));
+
+      showToast('✅ Profile updated successfully!');
+      // Refresh profile display
+      await loadUserProfile();
+    } catch (err) {
+      showToast('Save failed: ' + err.message, 'error');
+    } finally {
+      resetSaveBtn(btn, spinner);
+    }
+  }
+
+  function resetSaveBtn(btn, spinner) {
+    btn.disabled  = false;
+    btn.innerHTML = '<span class="material-symbols-outlined" style="font-size:18px">save</span> Save Changes';
+    spinner.classList.add('hidden');
+  }
+
+  // ─── Logout ───────────────────────────────────────────────────────────────
+  function handleLogout() {
+    localStorage.removeItem('pricebloom_user');
+    showToast('Logged out successfully!');
+    setTimeout(() => { window.location.href = 'index.html'; }, 800);
+  }
+
+  // ─── Add Tracker helpers ──────────────────────────────────────────────────
+  let currentProductPlatform = '';
+  let userProducts = [];
+
+  function formatCurrency(value, platform) {
+    if (value === null || value === undefined || value === '') return '—';
+    if (typeof value === 'number') {
+      return platform === 'Flipkart' || String(value).includes('₹') ? `₹${value}` : `$${value}`;
+    }
+    return String(value);
+  }
+
+  function getProductIcon(platform) {
+    if (!platform) return 'shopping_bag';
+    const lower = platform.toString().toLowerCase();
+    if (lower.includes('amazon')) return 'shopping_cart';
+    if (lower.includes('flipkart')) return 'shopping_bag';
+    return 'inventory_2';
+  }
+
+  function renderHistoryPage() {
+    const list = document.getElementById('history-list');
+    if (!list) return;
+
+    if (!userProducts.length) {
+      list.innerHTML = `
+        <div class="bg-white rounded-2xl border border-outline-variant/20 shadow-sm p-stack-lg text-center">
+          <p class="font-label-md text-label-md text-on-surface">No history available yet.</p>
+          <p class="font-body-sm text-body-sm text-secondary mt-stack-sm">Add a tracker to see price history based on your API data.</p>
+        </div>
+      `;
+      return;
+    }
+
+    list.innerHTML = userProducts.map(product => {
+      const title = product.ProductTitle || product.productTitle || product.ProductUrl?.split('/').slice(-1)[0] || 'Tracked Product';
+      const platform = product.Platform || product.platform || 'Product';
+      const productUrl = product.ProductUrl || product.productUrl || '';
+      const currentPrice = formatCurrency(product.CurrentPrice, platform) || 'Pending';
+      const targetPrice = formatCurrency(product.BloomPrice || product.TargetPrice, platform);
+      const originalPrice = formatCurrency(product.OriginalPriceAtAdd || product.originalPriceAtAdd, platform) || 'N/A';
+      const lastChecked = product.LastCheckedAt || product.lastChecked || 'Not checked yet';
+      const createdAt = product.CreatedAt || product.createdAt || 'Unknown';
+      const validUntil = product.ValidUntil || product.validUntil || null;
+      const status = (product.Status || product.status || 'active') === 'active' ? 'Tracking' : 'Paused';
+      const badge = status === 'Tracking' ? 'bg-primary/10 text-primary' : 'bg-surface-container-high text-secondary';
+      const icon = getProductIcon(platform);
+      const id = product.Id || product.id || '';
+      const bloomPriceValue = product.BloomPrice || product.TargetPrice || 0;
+
+      return `
+        <div class="bg-white rounded-2xl border border-outline-variant/20 shadow-sm p-stack-lg" id="product-card-${id}">
+          <div class="flex items-center justify-between mb-stack-md">
+            <div class="flex items-center gap-stack-md">
+              <div class="w-12 h-12 rounded-xl bg-surface-container-low flex items-center justify-center">
+                <span class="material-symbols-outlined text-secondary">${icon}</span>
+              </div>
+              <div>
+                <h4 class="font-label-md text-label-md text-on-surface">${title} <span class="text-secondary font-body-sm">(${id})</span></h4>
+                <p class="font-body-sm text-body-sm text-secondary">${platform} · Last checked ${lastChecked}</p>
+              </div>
+            </div>
+            <span class="font-label-sm text-label-sm ${badge} px-3 py-1 rounded-full">${status}</span>
+          </div>
+          <div class="space-y-stack-md mb-stack-md">
+            <div class="text-[12px] text-secondary break-words">
+              <span class="font-semibold text-on-surface">URL:</span>
+              <a href="${productUrl}" target="_blank" rel="noopener noreferrer" class="text-primary hover:underline break-words">${productUrl}</a>
+            </div>
+            <div class="grid grid-cols-2 gap-gutter text-sm text-secondary">
+              <div>
+                <p class="font-semibold text-on-surface">Product ID</p>
+                <p>${id}</p>
+              </div>
+              <div>
+                <p class="font-semibold text-on-surface">Created</p>
+                <p>${new Date(createdAt).toLocaleString() || createdAt}</p>
+              </div>
+              <div>
+                <p class="font-semibold text-on-surface">Original Price</p>
+                <p>${originalPrice}</p>
+              </div>
+              <div>
+                <p class="font-semibold text-on-surface">Valid Until</p>
+                <p>${validUntil ? new Date(validUntil).toLocaleString() : 'N/A'}</p>
+              </div>
+            </div>
+          </div>
+          <div class="grid grid-cols-3 gap-gutter mb-stack-md">
+            <div class="bg-surface-container-low rounded-xl p-stack-md text-center">
+              <p class="font-label-sm text-label-sm text-secondary uppercase mb-1">Current</p>
+              <p class="font-h3 text-h3 text-on-surface">${currentPrice}</p>
+            </div>
+            <div class="bg-surface-container-low rounded-xl p-stack-md text-center cursor-pointer hover:bg-primary/10 transition-all relative group" onclick="openEditModal('${id}', ${bloomPriceValue})">
+              <p class="font-label-sm text-label-sm text-secondary uppercase mb-1">Bloom Price</p>
+              <p class="font-h3 text-h3 text-primary" id="bloom-price-display-${id}">${targetPrice}</p>
+              <span class="material-symbols-outlined text-secondary group-hover:text-primary absolute top-2 right-2" style="font-size:16px">edit</span>
+            </div>
+            <div class="bg-surface-container-low rounded-xl p-stack-md text-center">
+              <p class="font-label-sm text-label-sm text-secondary uppercase mb-1">Validity</p>
+              <p class="font-h3 text-h3 text-primary">${validUntil ? Math.max(0, Math.ceil((new Date(validUntil) - new Date()) / (1000*60*60*24))) + ' days' : '2 days'}</p>
+            </div>
+          </div>
+          <div class="flex flex-wrap gap-2 justify-end">
+            <button onclick="confirmDeleteProduct('${id}')" class="px-stack-md py-2 bg-error text-on-error rounded-full text-label-sm hover:bg-error/90 transition-all">Delete</button>
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  function renderOverviewTrackers() {
+    const summary = document.getElementById('trackers-summary');
+    const grid = document.getElementById('active-trackers-grid');
+    const limit = 2;
+    if (summary) {
+      summary.textContent = userProducts.length
+        ? `Tracking ${userProducts.length} ${userProducts.length === 1 ? 'product' : 'products'} for price drops`
+        : 'No active trackers yet';
+    }
+    if (!grid) return;
+
+    if (!userProducts.length) {
+      grid.innerHTML = `
+        <div class="bg-white rounded-2xl border border-outline-variant/20 shadow-sm p-stack-lg text-center">
+          <p class="font-label-md text-label-md text-on-surface">No active trackers available.</p>
+          <p class="font-body-sm text-body-sm text-secondary mt-stack-sm">Add a tracker to start monitoring prices.</p>
+        </div>
+        <div onclick="navigate('add')" class="bg-surface-container-low/50 rounded-2xl border-2 border-dashed border-outline-variant/30 flex flex-col items-center justify-center p-stack-xl text-center hover:bg-surface-container-low transition-all cursor-pointer group">
+          <div class="w-16 h-16 rounded-full bg-primary/5 flex items-center justify-center mb-stack-md group-hover:bg-primary/10 transition-colors">
+            <span class="material-symbols-outlined text-primary" style="font-size:32px">add_circle</span>
+          </div>
+          <h4 class="font-h3 text-h3 text-on-surface mb-1">New Tracker</h4>
+          <p class="font-body-sm text-body-sm text-secondary mb-stack-md">Unlock slots to track more items</p>
+          <button onclick="navigate('pricing')" class="bg-primary text-on-primary font-label-md text-label-md px-stack-md py-2 rounded-lg" onclick="event.stopPropagation()">Upgrade Now</button>
+        </div>
+      `;
+      return;
+    }
+
+    grid.innerHTML = userProducts.map(product => {
+      const title = product.ProductTitle || product.productTitle || product.ProductUrl?.split('/').slice(-1)[0] || 'Tracked Product';
+      const platform = product.Platform || product.platform || 'Product';
+      const productUrl = product.ProductUrl || product.productUrl || '';
+      const currentPrice = formatCurrency(product.CurrentPrice, platform) || 'Pending';
+      const targetPrice = formatCurrency(product.BloomPrice || product.TargetPrice, platform);
+      const originalPrice = formatCurrency(product.OriginalPriceAtAdd || product.originalPriceAtAdd, platform) || 'N/A';
+      const status = (product.Status || product.status || 'active') === 'active' ? 'Live' : 'Paused';
+      const icon = getProductIcon(platform);
+      const remaining = product.ValidUntil ? Math.max(0, Math.ceil((new Date(product.ValidUntil) - new Date()) / (1000*60*60*24))) : 2;
+      const id = product.Id || product.id || '';
+
+      return `
+        <div class="bg-white rounded-2xl border border-outline-variant/20 shadow-sm hover:shadow-md transition-all group overflow-hidden">
+          <div class="h-48 bg-surface-container-lowest overflow-hidden relative">
+            <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-gray-50 to-gray-100 group-hover:scale-105 transition-transform duration-300">
+              <span class="material-symbols-outlined text-gray-300" style="font-size:80px">${icon}</span>
+            </div>
+            <div class="absolute top-stack-sm right-stack-sm bg-white/90 backdrop-blur px-2 py-1 rounded-lg border border-outline-variant/20 flex items-center gap-1 shadow-sm">
+              <span class="material-symbols-outlined text-secondary" style="font-size:18px">${icon}</span>
+              <span class="text-[10px] font-bold text-on-surface">${platform.toUpperCase()}</span>
+            </div>
+          </div>
+          <div class="p-stack-md">
+            <div class="flex justify-between items-start mb-2 gap-3">
+              <div class="min-w-0 flex-1">
+                <h4 class="font-label-md text-label-md text-on-surface line-clamp-1">${title}</h4>
+                <div class="text-[12px] text-secondary mt-2 break-words">
+                  <span class="font-semibold text-on-surface">URL:</span>
+                  <a href="${productUrl}" target="_blank" rel="noopener noreferrer" class="text-primary hover:underline break-words">${productUrl}</a>
+                </div>
+              </div>
+              <div class="flex flex-col gap-2">
+                <button onclick="editBloomPrice('${id}')" class="px-stack-sm py-2 bg-primary text-on-primary rounded-full text-label-sm hover:bg-primary/90 transition-all">Edit</button>
+                <button onclick="confirmDeleteProduct('${id}')" class="px-stack-sm py-2 bg-error text-on-error rounded-full text-label-sm hover:bg-error/90 transition-all">Delete</button>
+              </div>
+            </div>
+            <div class="grid grid-cols-2 gap-gutter mb-stack-md text-sm text-secondary">
+              <div>
+                <p class="font-semibold text-on-surface">Original Price</p>
+                <p>${originalPrice}</p>
+              </div>
+              <div>
+                <p class="font-semibold text-on-surface">Validity</p>
+                <p>${remaining} days</p>
+              </div>
+            </div>
+            <div class="grid grid-cols-3 gap-gutter">
+              <div class="bg-surface-container-low rounded-xl p-stack-md text-center">
+                <p class="font-label-sm text-label-sm text-secondary uppercase mb-1">Current</p>
+                <p class="font-h3 text-h3 text-on-surface">${currentPrice}</p>
+              </div>
+              <div class="bg-surface-container-low rounded-xl p-stack-md text-center">
+                <p class="font-label-sm text-label-sm text-secondary uppercase mb-1">Bloom Target</p>
+                <p class="font-h3 text-h3 text-primary">${targetPrice}</p>
+              </div>
+              <div class="bg-surface-container-low rounded-xl p-stack-md text-center">
+                <p class="font-label-sm text-label-sm text-secondary uppercase mb-1">Status</p>
+                <p class="font-h3 text-h3 text-on-surface">${status}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  function detectPlatform(url) {
+    const badge  = document.getElementById('platform-badge');
+    const icon   = document.getElementById('platform-icon');
+    const status = document.getElementById('url-status');
+    const lower  = url.trim().toLowerCase();
+
+    if (!lower) {
+      currentProductPlatform = '';
+      badge.classList.add('hidden');
+      status.innerHTML = '<span class="material-symbols-outlined text-[16px]">link</span><span>Paste a URL below</span>';
+      return;
+    }
+
+    if (lower.includes('amazon.')) {
+      currentProductPlatform = 'Amazon';
+      badge.classList.remove('hidden');
+      icon.textContent = 'shopping_cart'; icon.style.color = '#FF9900';
+      status.innerHTML = '<span class="material-symbols-outlined text-[16px] text-primary">verified</span><span class="text-primary">Amazon detected</span>';
+    } else if (lower.includes('flipkart.')) {
+      currentProductPlatform = 'Flipkart';
+      badge.classList.remove('hidden');
+      icon.textContent = 'shopping_bag'; icon.style.color = '#2874F0';
+      status.innerHTML = '<span class="material-symbols-outlined text-[16px] text-primary">verified</span><span class="text-primary">Flipkart detected</span>';
+    } else {
+      currentProductPlatform = '';
+      badge.classList.add('hidden');
+      status.innerHTML = '<span class="material-symbols-outlined text-[16px] text-error">error</span><span class="text-error">Unsupported URL. Use Amazon or Flipkart.</span>';
+    }
+  }
+
+  async function loadUserProducts() {
+    const session = getSession();
+    if (!session || !session.id) return;
+
+    try {
+      const res = await fetch(`${API_BASE}/api/products/user/${session.id}`, {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' }
+      });
+      const json = await res.json();
+      const data = (json?.data?.products && Array.isArray(json.data.products))
+        ? json.data.products
+        : (Array.isArray(json.data) ? json.data : (Array.isArray(json) ? json : []));
+      console.log('[loadUserProducts] user products:', json);
+      userProducts = data;
+      localStorage.setItem('pricebloom_products', JSON.stringify(userProducts));
+      renderOverviewTrackers();
+      renderHistoryPage();
+      return userProducts;
+    } catch (err) {
+      console.error('[loadUserProducts] failed', err);
+      userProducts = [];
+      renderOverviewTrackers();
+      renderHistoryPage();
+      return [];
+    }
+  }
+
+  async function updateProductPrice(productId, newPrice) {
+    if (!productId || !newPrice || newPrice <= 0) return false;
+    try {
+      const res = await fetch(`${API_BASE}/api/products/${productId}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ NewPrice: newPrice })
+      });
+      const json = await res.json();
+      console.log('[updateProductPrice] response:', json);
+      return res.ok;
+    } catch (err) {
+      console.error('[updateProductPrice] failed', err);
+      return false;
+    }
+  }
+
+  async function deleteProduct(productId, userId) {
+    if (!productId || !userId) return false;
+    try {
+      const res = await fetch(`${API_BASE}/api/products/${productId}?userId=${encodeURIComponent(userId)}`, {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' }
+      });
+      const json = await res.json();
+      console.log('[deleteProduct] response:', json);
+      return res.ok;
+    } catch (err) {
+      console.error('[deleteProduct] failed', err);
+      return false;
+    }
+  }
+
+  function openEditModal(productId, currentValue) {
+    const existingModal = document.getElementById(`edit-modal-${productId}`);
+    if (existingModal) {
+      existingModal.remove();
+      return;
+    }
+
+    const modal = document.createElement('div');
+    modal.id = `edit-modal-${productId}`;
+    modal.className = 'fixed inset-0 bg-black/50 flex items-center justify-center z-50';
+    modal.innerHTML = `
+      <div class="bg-white rounded-2xl shadow-lg p-stack-xl max-w-sm w-full mx-stack-md">
+        <h3 class="font-h3 text-h3 text-on-surface mb-stack-md">Edit Bloom Price</h3>
+        <div class="mb-stack-lg">
+          <label class="block font-label-md text-label-md text-on-surface mb-2">New Bloom Price</label>
+          <input type="number" id="new-price-input-${productId}" value="${currentValue}" step="0.01" min="0.01" class="w-full px-3 py-2 border border-outline-variant rounded-lg focus:outline-none focus:border-primary" />
+        </div>
+        <div class="flex gap-2 justify-end">
+          <button onclick="closeEditModal('${productId}')" class="px-stack-md py-2 bg-surface-container-low text-on-surface rounded-lg hover:bg-surface-container-high transition-all">Cancel</button>
+          <button onclick="saveEditBloomPrice('${productId}')" class="px-stack-md py-2 bg-primary text-on-primary rounded-lg hover:bg-primary/90 transition-all">Save</button>
+        </div>
+      </div>
+    `;
+    document.body.appendChild(modal);
+    document.getElementById(`new-price-input-${productId}`).focus();
+    document.getElementById(`new-price-input-${productId}`).select();
+  }
+
+  function closeEditModal(productId) {
+    const modal = document.getElementById(`edit-modal-${productId}`);
+    if (modal) modal.remove();
+  }
+
+  async function saveEditBloomPrice(productId) {
+    const input = document.getElementById(`new-price-input-${productId}`);
+    const newPrice = parseFloat(input?.value);
+    if (!newPrice || newPrice <= 0) {
+      showToast('Please enter a valid price greater than 0', 'error');
+      return;
+    }
+
+    const updated = await updateProductPrice(productId, newPrice);
+    if (updated) {
+      showToast('Bloom price updated successfully', 'success');
+      closeEditModal(productId);
+      await loadUserProducts();
+    } else {
+      showToast('Could not update Bloom price', 'error');
+    }
+  }
+
+  async function editBloomPrice(productId) {
+    const product = userProducts.find(p => p.Id === productId || p.id === productId);
+    if (!product) {
+      showToast('Product not found', 'error');
+      return;
+    }
+    openEditModal(productId, product.BloomPrice || product.TargetPrice || 0);
+  }
+
+  async function confirmDeleteProduct(productId) {
+    if (!confirm('Are you sure you want to delete this tracker?')) return;
+    const session = getSession();
+    if (!session || !session.id) {
+      showToast('Please sign in to delete a tracker', 'error');
+      return;
+    }
+
+    const deleted = await deleteProduct(productId, session.id);
+    if (deleted) {
+      showToast('Tracker deleted successfully', 'success');
+      await loadUserProducts();
+    } else {
+      showToast('Failed to delete tracker', 'error');
+    }
+  }
+
+  async function plantTracker() {
+    const url = document.getElementById('tracker-url').value.trim();
+    const price = parseFloat(document.getElementById('bloom-price').value);
+    if (!url) { showToast('Please enter a product URL first!', 'error'); return; }
+    if (!currentProductPlatform) { showToast('Please enter a valid Amazon or Flipkart URL', 'error'); return; }
+    if (!price || price <= 0) { showToast('Please enter a valid target price!', 'error'); return; }
+
+    const session = getSession();
+    if (!session || !session.id) {
+      showToast('Please log in to add a tracker', 'error');
+      return;
+    }
+
+    const body = {
+      UserId: session.id,
+      ProductUrl: url,
+      Platform: currentProductPlatform,
+      BloomPrice: price,
+      ValidityDays: 2
+    };
+
+    try {
+      const res = await fetch(`${API_BASE}/api/products`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body)
+      });
+      const json = await res.json();
+      console.log('[plantTracker] response:', json);
+      if (!res.ok) {
+        throw new Error(json.message || 'Failed to add tracker');
+      }
+      showToast('🌸 Tracker planted successfully!');
+      await loadUserProducts();
+      setTimeout(() => navigate('overview'), 1200);
+    } catch (err) {
+      showToast(err.message, 'error');
+    }
+  }
+
+  // ─── Init ─────────────────────────────────────────────────────────────────
+  // Redirect to login if no session
+  (function checkAuth() {
+    const session = getSession();
+    if (!session || !session.id) {
+      // Uncomment in production:
+      // window.location.href = 'index.html';
+    }
+  })();
+
+  (function initDashboardPage() {
+    const hashPage = window.location.hash.replace('#', '');
+    if (hashPage && pages.includes(hashPage)) {
+      navigate(hashPage);
+    } else {
+      navigate('overview');
+    }
+    if (getSession()?.id) {
+      loadUserProducts();
+    }
+  })();
 </script>
 </body>
 </html>
