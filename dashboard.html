@@ -148,7 +148,7 @@
       <a href="#" class="flex items-center gap-stack-sm text-secondary font-label-md text-label-md px-stack-sm py-2 hover:text-on-surface">
         <span class="material-symbols-outlined">help</span> Help Center
       </a>
-      <a href="#" onclick="showToast('Logged out!'); return false;" class="flex items-center gap-stack-sm text-secondary font-label-md text-label-md px-stack-sm py-2 hover:text-on-surface">
+      <a href="#" onclick="handleLogout(); return false;" class="flex items-center gap-stack-sm text-secondary font-label-md text-label-md px-stack-sm py-2 hover:text-on-surface">
         <span class="material-symbols-outlined">logout</span> Logout
       </a>
     </div>
@@ -162,7 +162,7 @@
   <header class="bg-surface/90 backdrop-blur-md sticky top-0 z-30 border-b border-outline-variant/30 shadow-sm">
     <div class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop py-stack-sm max-w-container-max mx-auto">
       <div class="flex items-center gap-stack-lg">
-        <div class="font-h2 text-h2 font-bold text-primary tracking-tight cursor-pointer" onclick="navigate('overview')">PriceBloomBuddy</div>
+        <div class="font-h2 text-h2 font-bold text-primary tracking-tight cursor-pointer" onclick="window.location.href = 'index.html';">PriceBloomBuddy</div>
         <nav class="hidden md:flex items-center gap-stack-md">
           <a href="#" id="topnav-overview" onclick="navigate('overview'); return false;" class="text-primary font-bold border-b-2 border-primary pb-1 font-label-md text-label-md">Dashboard</a>
           <a href="#" id="topnav-history" onclick="navigate('history'); return false;" class="text-secondary font-medium hover:text-primary transition-colors font-label-md text-label-md">Trackers</a>
@@ -201,14 +201,14 @@
         <div>
           <div class="flex justify-between items-center mb-stack-sm">
             <span class="font-label-md text-label-md text-secondary">Link Limit</span>
-            <span class="font-label-md text-label-md text-primary font-bold">2/2 Links Used</span>
+            <span id="tracker-limit-usage" class="font-label-md text-label-md text-primary font-bold">0/2 Links Used</span>
           </div>
           <div class="w-full h-3 bg-surface-container-highest rounded-full overflow-hidden mb-stack-md">
-            <div class="w-full h-full bg-primary rounded-full"></div>
+            <div id="tracker-limit-bar" class="h-full bg-primary rounded-full" style="width:0%"></div>
           </div>
-          <p class="font-body-sm text-body-sm text-secondary">You have reached your limit of 2 trackers on the Free Plan.</p>
+          <p id="tracker-limit-description" class="font-body-sm text-body-sm text-secondary">Loading tracker usage…</p>
         </div>
-        <button onclick="navigate('pricing')" class="w-full mt-stack-md border-2 border-primary text-primary font-label-md text-label-md py-3 rounded-xl hover:bg-primary/5 transition-all">Upgrade for More</button>
+        <button id="tracker-limit-button" onclick="navigate('add')" class="w-full mt-stack-md border-2 border-primary text-primary font-label-md text-label-md py-3 rounded-xl hover:bg-primary/5 transition-all">Add New Tracker</button>
       </div>
     </div>
 
@@ -491,7 +491,7 @@
         <div class="bg-white rounded-2xl border border-outline-variant/20 shadow-sm p-stack-xl">
           <h3 class="font-h3 text-h3 text-on-surface mb-stack-lg">Account Actions</h3>
           <div class="space-y-stack-sm">
-            <button onclick="showToast('Password reset email sent!')" class="w-full text-left flex items-center justify-between p-stack-md bg-surface-container-low rounded-xl hover:bg-surface-container transition-colors">
+            <button onclick="handleChangePassword()" class="w-full text-left flex items-center justify-between p-stack-md bg-surface-container-low rounded-xl hover:bg-surface-container transition-colors">
               <div class="flex items-center gap-stack-md">
                 <span class="material-symbols-outlined text-secondary">lock</span>
                 <span class="font-label-md text-label-md text-on-surface">Change Password</span>
@@ -505,7 +505,7 @@
               </div>
               <span class="material-symbols-outlined text-secondary">chevron_right</span>
             </button>
-            <button onclick="showToast('Please contact support to delete your account.')" class="w-full text-left flex items-center justify-between p-stack-md bg-error/5 rounded-xl hover:bg-error/10 transition-colors">
+            <button onclick="handleDeleteAccount()" class="w-full text-left flex items-center justify-between p-stack-md bg-error/5 rounded-xl hover:bg-error/10 transition-colors">
               <div class="flex items-center gap-stack-md">
                 <span class="material-symbols-outlined text-error">delete_forever</span>
                 <span class="font-label-md text-label-md text-error">Delete Account</span>
@@ -536,6 +536,12 @@
             <span class="font-label-md text-on-primary-container">Free Tier: 7-Day Tracking Validity</span>
           </div>
           <span class="font-label-sm text-primary underline cursor-pointer" onclick="navigate('pricing')">Extend with Pro</span>
+        </div>
+
+        <div id="add-limit-warning" class="hidden rounded-2xl border border-error/20 bg-error/5 p-stack-md text-error">
+          <p class="font-semibold">Free tracker limit reached</p>
+          <p class="font-body-sm text-secondary mt-1">Delete or stop an existing tracker, or upgrade to add more.</p>
+          <button onclick="navigate('pricing')" class="mt-3 bg-primary text-on-primary px-stack-md py-stack-sm rounded-full text-label-sm hover:bg-primary/90 transition-all">Upgrade to Pro</button>
         </div>
 
         <div class="space-y-stack-lg">
@@ -577,7 +583,7 @@
           </div>
 
           <!-- CTA -->
-          <button onclick="plantTracker()" class="w-full bg-primary-container text-on-primary-container py-stack-lg rounded-xl font-h3 hover:opacity-95 transition-all shadow-lg flex items-center justify-center gap-stack-md">
+          <button id="plant-tracker-btn" onclick="plantTracker()" class="w-full bg-primary-container text-on-primary-container py-stack-lg rounded-xl font-h3 hover:opacity-95 transition-all shadow-lg flex items-center justify-center gap-stack-md">
             <span class="material-symbols-outlined">local_florist</span>
             Plant This Tracker
           </button>
@@ -953,12 +959,67 @@
 
   // ─── Logout ───────────────────────────────────────────────────────────────
   function handleLogout() {
+    localStorage.removeItem('pbb_auth_token');
+    localStorage.removeItem('pbb_user_email');
+    localStorage.removeItem('pbb_user_id');
     localStorage.removeItem('pricebloom_user');
     showToast('Logged out successfully!');
     setTimeout(() => { window.location.href = 'index.html'; }, 800);
   }
 
-  // ─── Add Tracker helpers ──────────────────────────────────────────────────
+  async function handleChangePassword() {
+    const session = getSession();
+    if (!session || !session.id) {
+      showToast('Please log in again to change your password.', 'error');
+      return;
+    }
+    const newPassword = window.prompt('Enter your new password (min 3 characters):');
+    if (!newPassword) return;
+    if (newPassword.length < 3) {
+      showToast('Password must be at least 3 characters long.', 'error');
+      return;
+    }
+    try {
+      const res = await fetch(`${API_BASE}/api/user/${session.id}/password`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ Password: newPassword })
+      });
+      const json = await res.json();
+      if (!res.ok) throw new Error(json.message || json.error || 'Password update failed');
+      showToast('Password changed successfully!', 'success');
+    } catch (err) {
+      if (err instanceof TypeError || err.message.includes('Failed to fetch')) {
+        showToast('Backend unavailable. Please try again later.', 'error');
+      } else {
+        showToast(err.message, 'error');
+      }
+    }
+  }
+
+  async function handleDeleteAccount() {
+    const session = getSession();
+    if (!session || !session.id) {
+      showToast('Please log in again to delete your account.', 'error');
+      return;
+    }
+    const confirmed = window.confirm('Delete your account permanently? This cannot be undone.');
+    if (!confirmed) return;
+    try {
+      const res = await fetch(`${API_BASE}/api/user/${session.id}`, { method: 'DELETE' });
+      const json = await res.json();
+      if (!res.ok) throw new Error(json.message || json.error || 'Account deletion failed');
+      showToast('Account deleted successfully.', 'success');
+      setTimeout(() => handleLogout(), 800);
+    } catch (err) {
+      if (err instanceof TypeError || err.message.includes('Failed to fetch')) {
+        showToast('Backend unavailable. Please try again later.', 'error');
+      } else {
+        showToast(err.message, 'error');
+      }
+    }
+  }
+  const FREE_TRACKER_LIMIT = 2;
   let currentProductPlatform = '';
   let userProducts = [];
 
@@ -978,6 +1039,48 @@
     return 'inventory_2';
   }
 
+  function getActiveTrackers() {
+    return userProducts.filter(product => {
+      const status = String(product.Status || product.status || '').toLowerCase();
+      return status !== 'deleted';
+    });
+  }
+
+  function updateTrackerLimitPanel() {
+    const activeCount = getActiveTrackers().length;
+    const usageEl = document.getElementById('tracker-limit-usage');
+    const descEl = document.getElementById('tracker-limit-description');
+    const btnEl = document.getElementById('tracker-limit-button');
+    const barEl = document.getElementById('tracker-limit-bar');
+    const warningEl = document.getElementById('add-limit-warning');
+    const plantBtn = document.getElementById('plant-tracker-btn');
+
+    if (usageEl) {
+      usageEl.textContent = `${activeCount}/${FREE_TRACKER_LIMIT} Links Used`;
+    }
+    if (descEl) {
+      descEl.textContent = activeCount >= FREE_TRACKER_LIMIT
+        ? `You have reached your limit of ${FREE_TRACKER_LIMIT} trackers on the Free Plan.`
+        : `You can add ${FREE_TRACKER_LIMIT - activeCount} more tracker${FREE_TRACKER_LIMIT - activeCount === 1 ? '' : 's'} on the Free Plan.`;
+    }
+    if (btnEl) {
+      btnEl.textContent = activeCount >= FREE_TRACKER_LIMIT ? 'Upgrade for More' : 'Add New Tracker';
+      btnEl.onclick = activeCount >= FREE_TRACKER_LIMIT ? () => navigate('pricing') : () => navigate('add');
+    }
+    if (barEl) {
+      const pct = Math.min(100, Math.round((activeCount / FREE_TRACKER_LIMIT) * 100));
+      barEl.style.width = `${pct}%`;
+    }
+    if (warningEl) {
+      warningEl.classList.toggle('hidden', activeCount < FREE_TRACKER_LIMIT);
+    }
+    if (plantBtn) {
+      plantBtn.disabled = activeCount >= FREE_TRACKER_LIMIT;
+      plantBtn.classList.toggle('opacity-50', activeCount >= FREE_TRACKER_LIMIT);
+      plantBtn.classList.toggle('cursor-not-allowed', activeCount >= FREE_TRACKER_LIMIT);
+    }
+  }
+
   function renderHistoryPage() {
     const list = document.getElementById('history-list');
     if (!list) return;
@@ -993,17 +1096,18 @@
     }
 
     list.innerHTML = userProducts.map(product => {
-      const title = product.ProductTitle || product.productTitle || product.ProductUrl?.split('/').slice(-1)[0] || 'Tracked Product';
+      const title = product.ProductTitle || product.productTitle || product.Id || product.id || product.ProductUrl?.split('/').slice(-1)[0] || 'Tracked Product';
       const platform = product.Platform || product.platform || 'Product';
       const productUrl = product.ProductUrl || product.productUrl || '';
       const currentPrice = formatCurrency(product.CurrentPrice, platform) || 'Pending';
       const targetPrice = formatCurrency(product.BloomPrice || product.TargetPrice, platform);
       const originalPrice = formatCurrency(product.OriginalPriceAtAdd || product.originalPriceAtAdd, platform) || 'N/A';
-      const lastChecked = product.LastCheckedAt || product.lastChecked || 'Not checked yet';
+      // const lastChecked = product.LastCheckedAt || product.lastChecked || 'Not checked yet';
+      const lastChecked = product.LastCheckedAt ? new Date(product.LastCheckedAt).toLocaleString() : 'Not checked yet';
       const createdAt = product.CreatedAt || product.createdAt || 'Unknown';
       const validUntil = product.ValidUntil || product.validUntil || null;
-      const status = (product.Status || product.status || 'active') === 'active' ? 'Tracking' : 'Paused';
-      const badge = status === 'Tracking' ? 'bg-primary/10 text-primary' : 'bg-surface-container-high text-secondary';
+      const status = product.Status || product.status || 'Unknown';
+      const badge = status.toLowerCase() === 'deleted' ? 'bg-error/10 text-error' : 'bg-primary/10 text-primary';
       const icon = getProductIcon(platform);
       const id = product.Id || product.id || '';
       const bloomPriceValue = product.BloomPrice || product.TargetPrice || 0;
@@ -1072,15 +1176,16 @@
   function renderOverviewTrackers() {
     const summary = document.getElementById('trackers-summary');
     const grid = document.getElementById('active-trackers-grid');
-    const limit = 2;
+    const activeProducts = getActiveTrackers();
+    const activeCount = activeProducts.length;
     if (summary) {
-      summary.textContent = userProducts.length
-        ? `Tracking ${userProducts.length} ${userProducts.length === 1 ? 'product' : 'products'} for price drops`
+      summary.textContent = activeCount
+        ? `Tracking ${activeCount} active ${activeCount === 1 ? 'tracker' : 'trackers'} for price drops`
         : 'No active trackers yet';
     }
     if (!grid) return;
 
-    if (!userProducts.length) {
+    if (!activeProducts.length) {
       grid.innerHTML = `
         <div class="bg-white rounded-2xl border border-outline-variant/20 shadow-sm p-stack-lg text-center">
           <p class="font-label-md text-label-md text-on-surface">No active trackers available.</p>
@@ -1098,14 +1203,14 @@
       return;
     }
 
-    grid.innerHTML = userProducts.map(product => {
-      const title = product.ProductTitle || product.productTitle || product.ProductUrl?.split('/').slice(-1)[0] || 'Tracked Product';
+    grid.innerHTML = activeProducts.map(product => {
+      const title = product.ProductTitle || product.productTitle || product.Id || product.id || product.ProductUrl?.split('/').slice(-1)[0] || 'Tracked Product';
       const platform = product.Platform || product.platform || 'Product';
       const productUrl = product.ProductUrl || product.productUrl || '';
       const currentPrice = formatCurrency(product.CurrentPrice, platform) || 'Pending';
       const targetPrice = formatCurrency(product.BloomPrice || product.TargetPrice, platform);
       const originalPrice = formatCurrency(product.OriginalPriceAtAdd || product.originalPriceAtAdd, platform) || 'N/A';
-      const status = (product.Status || product.status || 'active') === 'active' ? 'Live' : 'Paused';
+      const status = product.Status || product.status || 'Unknown';
       const icon = getProductIcon(platform);
       const remaining = product.ValidUntil ? Math.max(0, Math.ceil((new Date(product.ValidUntil) - new Date()) / (1000*60*60*24))) : 2;
       const id = product.Id || product.id || '';
@@ -1209,16 +1314,27 @@
         ? json.data.products
         : (Array.isArray(json.data) ? json.data : (Array.isArray(json) ? json : []));
       console.log('[loadUserProducts] user products:', json);
-      userProducts = data;
+      const uniqueProducts = [];
+      const seenIds = new Set();
+      for (const product of data) {
+        const id = product.Id || product.id || product.ProductUrl || product.productUrl;
+        if (!id) continue;
+        if (seenIds.has(id)) continue;
+        seenIds.add(id);
+        uniqueProducts.push(product);
+      }
+      userProducts = uniqueProducts;
       localStorage.setItem('pricebloom_products', JSON.stringify(userProducts));
       renderOverviewTrackers();
       renderHistoryPage();
+      updateTrackerLimitPanel();
       return userProducts;
     } catch (err) {
       console.error('[loadUserProducts] failed', err);
       userProducts = [];
       renderOverviewTrackers();
       renderHistoryPage();
+      updateTrackerLimitPanel();
       return [];
     }
   }
@@ -1339,6 +1455,11 @@
     if (!url) { showToast('Please enter a product URL first!', 'error'); return; }
     if (!currentProductPlatform) { showToast('Please enter a valid Amazon or Flipkart URL', 'error'); return; }
     if (!price || price <= 0) { showToast('Please enter a valid target price!', 'error'); return; }
+
+    if (getActiveTrackers().length >= FREE_TRACKER_LIMIT) {
+      showToast('Free plan limit reached. Delete a tracker or upgrade to add more.', 'error');
+      return;
+    }
 
     const session = getSession();
     if (!session || !session.id) {

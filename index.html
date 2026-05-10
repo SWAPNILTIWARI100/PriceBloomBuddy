@@ -514,6 +514,12 @@
     bindNavigation();
     syncStoredUserToAuth();
     updateAuthUI();
+
+    const backendError = localStorage.getItem('pbb_backend_error_message');
+    if (backendError) {
+      localStorage.removeItem('pbb_backend_error_message');
+      showToast(backendError, 'error');
+    }
     
     // If coming back from login, check for redirect
     const redirectUrl = localStorage.getItem('pbb_redirect_after_login');

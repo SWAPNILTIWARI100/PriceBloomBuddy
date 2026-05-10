@@ -132,6 +132,47 @@
 <!-- Toast Container -->
 <div id="toast-container" class="fixed top-20 right-4 z-[100] flex flex-col gap-2 max-w-sm w-full"></div>
 
+<!-- TopNavBar -->
+<nav class="bg-surface/90 backdrop-blur-md sticky top-0 z-50 border-b border-outline-variant/30 shadow-sm">
+  <div class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop py-stack-sm max-w-container-max mx-auto">
+    <div class="flex items-center gap-gutter">
+      <button id="nav-home" class="font-h2 text-h2 font-bold text-primary tracking-tight hover:opacity-90 transition-opacity cursor-pointer">PriceBloomBuddy</button>
+      <div class="hidden md:flex items-center gap-stack-lg">
+        <button id="nav-dashboard" class="text-secondary font-medium hover:text-primary transition-colors cursor-pointer">Dashboard</button>
+        <button id="nav-trackers" class="text-secondary font-medium hover:text-primary transition-colors cursor-pointer">Trackers</button>
+        <button id="nav-subscription" class="text-secondary font-medium hover:text-primary transition-colors cursor-pointer">Subscription</button>
+      </div>
+    </div>
+    <div class="flex items-center gap-stack-md">
+      <button id="add-link-btn" class="hidden md:flex items-center gap-stack-xs bg-primary text-on-primary px-stack-md py-stack-sm rounded-lg font-label-md hover:bg-primary/90 transition-all active:scale-95 cursor-pointer"><span class="material-symbols-outlined">add</span>Add Link</button>
+      <div class="flex gap-stack-sm text-secondary">
+        <button id="notifications-btn" class="flex items-center justify-center text-inherit hover:bg-surface-container-low transition-all rounded-full cursor-pointer">
+          <span class="material-symbols-outlined p-stack-sm">notifications</span>
+        </button>
+        <div class="relative">
+          <button id="account-menu-btn" class="flex items-center justify-center text-inherit hover:bg-surface-container-low transition-all rounded-full cursor-pointer">
+            <button id="auth-nav-btn" class="flex items-center justify-center gap-stack-xs bg-primary text-on-primary px-4 py-2 rounded-lg font-label-md hover:bg-primary/90 transition-all active:scale-95 cursor-pointer">
+              <span class="material-symbols-outlined text-[20px]">account_circle</span>
+              <span id="auth-nav-text">Sign In</span>
+            </button>
+          </button>
+          <div id="account-dropdown" class="hidden absolute right-0 mt-2 w-48 bg-surface rounded-xl shadow-lg border border-outline-variant/30 z-50 overflow-hidden">
+            <div id="dropdown-loggedout-view" class="py-2">
+              <button id="login-dropdown-btn" class="w-full text-left px-4 py-2 text-sm text-on-background hover:bg-surface-container-low transition-colors font-medium cursor-pointer">Sign In</button>
+              <button id="signup-dropdown-btn" class="w-full text-left px-4 py-2 text-sm text-on-background hover:bg-surface-container-low transition-colors font-medium cursor-pointer">Create Account</button>
+            </div>
+            <div id="dropdown-loggedin-view" class="hidden py-2">
+              <div class="px-4 py-2 text-sm font-semibold text-primary border-b border-outline-variant/20" id="dropdown-user-email">demo@pricebloom.com</div>
+              <button id="myprofile-dropdown-btn" class="w-full text-left px-4 py-2 text-sm text-on-background hover:bg-surface-container-low transition-colors cursor-pointer">My Profile</button>
+              <button id="logout-dropdown-btn" class="w-full text-left px-4 py-2 text-sm text-error hover:bg-surface-container-low transition-colors cursor-pointer">Sign Out</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
 <div class="flex min-h-screen overflow-hidden">
   <!-- Visual Sidebar (Aesthetic Branding) -->
   <aside class="hidden lg:flex w-1/3 bg-primary relative flex-col justify-between p-stack-xl">
@@ -418,9 +459,11 @@ let currentUserId = null;
     if (saved) {
       try {
         currentUser = JSON.parse(saved);
+        updateAuthUI();
         showDashboard();
       } catch(e) { console.error(e); }
     } else {
+      updateAuthUI();
       showAuthViews();
     }
   }
@@ -444,13 +487,15 @@ let currentUserId = null;
         localStorage.setItem(typeof PBB_USER_ID_KEY !== 'undefined' ? PBB_USER_ID_KEY : 'pbb_user_id', user.id);
       }
       currentUser = user;
-      showDashboard();
+      updateAuthUI();
+      // Don't show dashboard here, just save and redirect
     } else {
       localStorage.removeItem(typeof PBB_USER_STORAGE_KEY !== 'undefined' ? PBB_USER_STORAGE_KEY : 'pricebloom_user');
       localStorage.removeItem(typeof PBB_AUTH_TOKEN_KEY !== 'undefined' ? PBB_AUTH_TOKEN_KEY : 'pbb_auth_token');
       localStorage.removeItem(typeof PBB_USER_EMAIL_KEY !== 'undefined' ? PBB_USER_EMAIL_KEY : 'pbb_user_email');
       localStorage.removeItem(typeof PBB_USER_ID_KEY !== 'undefined' ? PBB_USER_ID_KEY : 'pbb_user_id');
       currentUser = null;
+      updateAuthUI();
       showAuthViews();
     }
   }
@@ -552,19 +597,26 @@ async function signupUser(name, email, password, mobile) {
 }
 
 async function loginUser(email, password) {
-  const response = await fetch(`${API_BASE}/api/auth/login`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ Email: email, Password: password })
-  });
-  const data = await response.json();
-  if (response.ok && data) {
-    if (data.success === false) {
+  try {
+    const response = await fetch(`${API_BASE}/api/auth/login`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ Email: email, Password: password })
+    });
+    const data = await response.json();
+    if (response.ok && data) {
+      if (data.success === false) {
+        throw new Error(data.message || data.error || 'Login failed');
+      }
+      return { success: true, userId: data.data?.userId || data.data?.id || data.userId || null };
+    } else {
       throw new Error(data.message || data.error || 'Login failed');
     }
-    return { success: true, userId: data.data?.userId || data.data?.id || data.userId || null };
-  } else {
-    throw new Error(data.message || data.error || 'Login failed');
+  } catch (err) {
+    if (err instanceof TypeError || err.message.includes('Failed to fetch')) {
+      throw new Error('Backend unavailable. Please start the backend and try again.');
+    }
+    throw err;
   }
 }
 
@@ -619,11 +671,15 @@ function logoutUser() {
         redirectAfterLogin();
       }, 500);
     } catch (err) {
-      showToast(err.message, 'error');
-      if (err.message.includes('Invalid email or password')) {
+      if (err.message.includes('Please verify your email first')) {
+        showToast('Please verify your email first. Check your email for verification link.', 'info');
+      } else if (err.message.includes('Invalid email or password')) {
         showForgotPassword(email);
-      } else if (err.message.includes('Please verify your email first')) {
-        showVerifyEmail(email);
+      } else if (err.message.includes('Backend unavailable')) {
+        localStorage.setItem('pbb_backend_error_message', err.message);
+        window.location.href = 'index.html';
+      } else {
+        showToast(err.message, 'error');
       }
     }
   });
@@ -773,6 +829,103 @@ function logoutUser() {
       });
     }
   });
+
+  // Nav event listeners
+  document.getElementById('nav-home')?.addEventListener('click', () => {
+    window.location.href = 'index.html';
+  });
+  document.getElementById('nav-dashboard')?.addEventListener('click', () => {
+    if (currentUser) {
+      window.location.href = 'dashboard.html';
+    } else {
+      showToast('Please sign in first', 'info');
+    }
+  });
+  document.getElementById('nav-trackers')?.addEventListener('click', () => {
+    if (currentUser) {
+      window.location.href = 'dashboard.html';
+    } else {
+      showToast('Please sign in first', 'info');
+    }
+  });
+  document.getElementById('nav-subscription')?.addEventListener('click', () => {
+    window.location.href = 'index.html#pricing';
+  });
+  document.getElementById('add-link-btn')?.addEventListener('click', () => {
+    if (currentUser) {
+      window.location.href = 'dashboard.html?action=addTracker';
+    } else {
+      showToast('Please sign in to add trackers', 'info');
+    }
+  });
+  document.getElementById('notifications-btn')?.addEventListener('click', () => {
+    if (currentUser) {
+      showToast('You have notifications!', 'info');
+    } else {
+      showToast('Sign in to see notifications', 'info');
+    }
+  });
+
+  // Auth nav
+  const dropdown = document.getElementById('account-dropdown');
+  document.getElementById('auth-nav-btn')?.addEventListener('click', () => {
+    if (currentUser) {
+      window.location.href = 'dashboard.html';
+    }
+  });
+  document.getElementById('account-menu-btn')?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (currentUser) {
+      dropdown.classList.toggle('hidden');
+    }
+  });
+  document.addEventListener('click', (e) => {
+    if (dropdown && !dropdown.contains(e.target)) {
+      dropdown.classList.add('hidden');
+    }
+  });
+
+  // Dropdown buttons
+  document.getElementById('login-dropdown-btn')?.addEventListener('click', () => {
+    showAuthViews();
+  });
+  document.getElementById('signup-dropdown-btn')?.addEventListener('click', () => {
+    loginView.classList.add('hidden');
+    signupView.classList.remove('hidden');
+  });
+  document.getElementById('logout-dropdown-btn')?.addEventListener('click', () => {
+    logoutUser();
+    updateAuthUI();
+    showToast('Signed out', 'info');
+  });
+  document.getElementById('myprofile-dropdown-btn')?.addEventListener('click', () => {
+    window.location.href = 'dashboard.html#settings';
+  });
+
+  // Update auth UI
+  function updateAuthUI() {
+    const loggedIn = !!currentUser;
+    const authNavText = document.getElementById('auth-nav-text');
+    const loggedoutView = document.getElementById('dropdown-loggedout-view');
+    const loggedinView = document.getElementById('dropdown-loggedin-view');
+    const dropdownUserEmail = document.getElementById('dropdown-user-email');
+    
+    if (loggedIn) {
+      if (authNavText) authNavText.innerText = 'My Account';
+      if (loggedoutView) loggedoutView.classList.add('hidden');
+      if (loggedinView) {
+        loggedinView.classList.remove('hidden');
+        if (dropdownUserEmail) dropdownUserEmail.innerText = currentUser.email || 'user@pricebloom.com';
+      }
+    } else {
+      if (authNavText) authNavText.innerText = 'Sign In';
+      if (loggedoutView) loggedoutView.classList.remove('hidden');
+      if (loggedinView) loggedinView.classList.add('hidden');
+    }
+  }
+
+  // Call updateAuthUI on load
+  updateAuthUI();
 
   // Initialize
   loadSession();
