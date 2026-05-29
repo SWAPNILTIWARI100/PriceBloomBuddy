@@ -1293,10 +1293,21 @@
       badge.classList.remove('hidden');
       icon.textContent = 'shopping_bag'; icon.style.color = '#2874F0';
       status.innerHTML = '<span class="material-symbols-outlined text-[16px] text-primary">verified</span><span class="text-primary">Flipkart detected</span>';
-    } else {
+    }else if (lower.includes('ajio.')) {
+      currentProductPlatform = 'Ajio';
+      badge.classList.remove('hidden');
+      icon.textContent = 'shopping_bag'; icon.style.color = '#2874F0';
+      status.innerHTML = '<span class="material-symbols-outlined text-[16px] text-primary">verified</span><span class="text-primary">Ajio detected</span>';
+    } else if (lower.includes('myntra.')) {
+      currentProductPlatform = 'Myntra';
+      badge.classList.remove('hidden');
+      icon.textContent = 'shopping_bag'; icon.style.color = '#2874F0';
+      status.innerHTML = '<span class="material-symbols-outlined text-[16px] text-primary">verified</span><span class="text-primary">Myntra detected</span>';
+    } 
+    else {
       currentProductPlatform = '';
       badge.classList.add('hidden');
-      status.innerHTML = '<span class="material-symbols-outlined text-[16px] text-error">error</span><span class="text-error">Unsupported URL. Use Amazon or Flipkart.</span>';
+      status.innerHTML = '<span class="material-symbols-outlined text-[16px] text-error">error</span><span class="text-error">Unsupported URL. Use Amazon/Flipkart/Ajio/Myntra.</span>';
     }
   }
 
@@ -1453,7 +1464,7 @@
     const url = document.getElementById('tracker-url').value.trim();
     const price = parseFloat(document.getElementById('bloom-price').value);
     if (!url) { showToast('Please enter a product URL first!', 'error'); return; }
-    if (!currentProductPlatform) { showToast('Please enter a valid Amazon or Flipkart URL', 'error'); return; }
+    if (!currentProductPlatform) { showToast('Please enter a valid Amazon/Flipkart/Ajio/Myntra  URL', 'error'); return; }
     if (!price || price <= 0) { showToast('Please enter a valid target price!', 'error'); return; }
 
     if (getActiveTrackers().length >= FREE_TRACKER_LIMIT) {
